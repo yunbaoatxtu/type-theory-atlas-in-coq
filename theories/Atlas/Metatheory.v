@@ -11772,3 +11772,18 @@ Proof.
   exact (atlas_public_release_paper_route_paper_statement
     type_theory_atlas_public_release_paper_route_certificate_holds).
 Qed.
+
+Definition type_theory_atlas_public_release_paper_route : Prop :=
+  type_theory_atlas_public_release_paper_route_certificate.
+
+Theorem type_theory_atlas_public_release_paper_route_holds :
+  type_theory_atlas_public_release_paper_route.
+Proof.
+  apply type_theory_atlas_public_release_paper_route_certificate_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_route_gives_certificate :
+  type_theory_atlas_public_release_paper_route_certificate.
+Proof.
+  apply type_theory_atlas_public_release_paper_route_holds.
+Qed.

@@ -10,6 +10,8 @@ metatheory.
 
 Current top-level entry points:
 
+- public release paper route:
+  `type_theory_atlas_public_release_paper_route_holds`;
 - public release complete:
   `type_theory_atlas_public_release_complete_holds`;
 - public release paper route certificate:
@@ -106,6 +108,7 @@ The README-facing entry names are kept aligned with
 `theories/Atlas/Metatheory.v` as follows:
 
 - Current top-level entries:
+  `type_theory_atlas_public_release_paper_route_holds`,
   `type_theory_atlas_public_release_paper_route_certificate_holds`,
   `type_theory_atlas_public_release_complete_holds`,
   `type_theory_atlas_public_release_complete_certificate_holds`,
@@ -838,7 +841,10 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_complete_entry_gives_stage5_translation_reliability`,
   `type_theory_atlas_public_release_complete_entry_gives_stage6_metatheory`, and
   `type_theory_atlas_public_release_complete_entry_gives_paper_statement`.
-- Public release paper route certificate:
+- Public release paper route entry and certificate:
+  `type_theory_atlas_public_release_paper_route`,
+  `type_theory_atlas_public_release_paper_route_holds`,
+  `type_theory_atlas_public_release_paper_route_gives_certificate`,
   `type_theory_atlas_public_release_paper_route_certificate`,
   `type_theory_atlas_public_release_paper_route_certificate_holds`,
   `type_theory_atlas_public_release_complete_gives_paper_route_certificate`,
@@ -2190,6 +2196,8 @@ paper-facing statement from that short entry.
 The theorem `type_theory_atlas_public_release_paper_route_certificate_holds`
 packages that short final entry with the stage route, translation reliability,
 main metatheory theorem, and paper-facing statement for paper-level citation.
+The theorem `type_theory_atlas_public_release_paper_route_holds` is the
+shortest paper-route theorem alias for that certificate.
 
 ## Homepage Summary
 
@@ -2204,6 +2212,9 @@ system translations -> metatheory.
 
 Final Coq entry point:
 `type_theory_atlas_public_release_complete_holds`.
+
+Paper route entry point:
+`type_theory_atlas_public_release_paper_route_holds`.
 
 Paper route certificate:
 `type_theory_atlas_public_release_paper_route_certificate_holds`.
@@ -2239,6 +2250,9 @@ Shortest release entry:
 Paper route certificate:
 `type_theory_atlas_public_release_paper_route_certificate_holds`.
 
+Paper route entry:
+`type_theory_atlas_public_release_paper_route_holds`.
+
 Release package check: `make check-public-release-final-package`.
 
 Complete verification: `make check`.
@@ -2255,6 +2269,7 @@ Type Theory Atlas in Coq: From MLTT and UTT to Temporal Dependent Type Theory.
 Repository: https://github.com/yunbaoatxtu/type-theory-atlas-in-coq
 Coq release manifest: type_theory_atlas_public_release_manifest_holds
 Coq release complete: type_theory_atlas_public_release_complete_holds
+Coq paper route: type_theory_atlas_public_release_paper_route_holds
 ```
 
 This citation points to the Coq-checked public release manifest, which packages
@@ -2265,6 +2280,8 @@ and paper-facing statement into one release handle.
 
 The current public release complete entry point is
 `type_theory_atlas_public_release_complete_holds`.
+The current public release paper route entry point is
+`type_theory_atlas_public_release_paper_route_holds`.
 The current public release paper route certificate entry point is
 `type_theory_atlas_public_release_paper_route_certificate_holds`.
 The current public release manifest entry point is
@@ -2333,6 +2350,7 @@ The public release checklist is:
 - unfinished-proof scan: `make check-no-admits`;
 - Coq release manifest theorem: `type_theory_atlas_public_release_manifest_holds`;
 - Coq release complete theorem: `type_theory_atlas_public_release_complete_holds`;
+- Coq release paper route theorem: `type_theory_atlas_public_release_paper_route_holds`;
 - Coq release paper route certificate: `type_theory_atlas_public_release_paper_route_certificate_holds`;
 - Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.
 
@@ -2360,6 +2378,7 @@ The expected verification story is:
 - public release manifest stage-sync check: `make check-public-release-manifest-stage-sync`;
 - public release complete certificate check: `make check-public-release-complete`;
 - public release complete entry projection check: `make check-public-release-complete-entry-projections`;
+- public release paper route entry check: `make check-public-release-paper-route-entry`;
 - public release paper route check: `make check-public-release-paper-route`;
 - public homepage summary check: `make check-public-homepage-summary`;
 - public homepage verification check: `make check-public-homepage-verification`;
