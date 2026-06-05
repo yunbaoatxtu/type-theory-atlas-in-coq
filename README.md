@@ -888,7 +888,8 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_citation_gives_paper_route`,
   `type_theory_atlas_public_release_citation_gives_paper_route_certificate`,
   `type_theory_atlas_public_release_citation_gives_final_public_theorem`,
-  `type_theory_atlas_public_release_citation_gives_final_certificate`, and
+  `type_theory_atlas_public_release_citation_gives_final_certificate`,
+  `type_theory_atlas_public_release_citation_gives_release_summary`, and
   `type_theory_atlas_public_release_citation_gives_paper_statement`.
 - Public release paper-ready release:
   `type_theory_atlas_public_release_paper_ready_release`,
@@ -899,7 +900,8 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_paper_ready_release_gives_paper_route`,
   `type_theory_atlas_public_release_paper_ready_release_gives_paper_route_certificate`,
   `type_theory_atlas_public_release_paper_ready_release_gives_final_public_theorem`,
-  `type_theory_atlas_public_release_paper_ready_release_gives_final_certificate`, and
+  `type_theory_atlas_public_release_paper_ready_release_gives_final_certificate`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_release_summary`, and
   `type_theory_atlas_public_release_paper_ready_release_gives_paper_statement`.
 - Build status checks:
   `make check`, which runs the environment check, README entry consistency
@@ -2329,9 +2331,9 @@ This citation points to the Coq-checked public release manifest, which packages
 the unified syntax framework, MLTT, UTT, TDTT, system translations, metatheory,
 and paper-facing statement into one release handle. The citation certificate
 packages the manifest, release-complete entry, paper route, final public
-theorem, final certificate, and paper-facing statement into one citation-ready
-Coq handle. The paper-ready release theorem is the shortest Coq theorem for
-paper-facing citation of the same package.
+theorem, final certificate, release summary, and paper-facing statement into
+one citation-ready Coq handle. The paper-ready release theorem is the shortest
+Coq theorem for paper-facing citation of the same package.
 
 ## Build Status Summary
 

@@ -1614,6 +1614,7 @@ check-public-release-citation-certificate:
 		type_theory_atlas_public_release_citation_gives_paper_route_certificate \
 		type_theory_atlas_public_release_citation_gives_final_public_theorem \
 		type_theory_atlas_public_release_citation_gives_final_certificate \
+		type_theory_atlas_public_release_citation_gives_release_summary \
 		type_theory_atlas_public_release_citation_gives_paper_statement; do \
 		if ! rg -q "^(Theorem|Corollary|Record|Definition|Lemma) $${entry}\\b" theories/Atlas/Metatheory.v; then \
 			echo "Missing public release citation certificate entry in theories/Atlas/Metatheory.v: $$entry"; \
@@ -1645,6 +1646,7 @@ check-public-release-paper-ready-release:
 		type_theory_atlas_public_release_paper_ready_release_gives_paper_route_certificate \
 		type_theory_atlas_public_release_paper_ready_release_gives_final_public_theorem \
 		type_theory_atlas_public_release_paper_ready_release_gives_final_certificate \
+		type_theory_atlas_public_release_paper_ready_release_gives_release_summary \
 		type_theory_atlas_public_release_paper_ready_release_gives_paper_statement; do \
 		if ! rg -q "^(Theorem|Corollary|Record|Definition|Lemma) $${entry}\\b" theories/Atlas/Metatheory.v; then \
 			echo "Missing public release paper-ready release entry in theories/Atlas/Metatheory.v: $$entry"; \

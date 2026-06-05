@@ -11908,6 +11908,8 @@ Record type_theory_atlas_public_release_citation_certificate : Prop := {
     type_theory_atlas_final_public_theorem;
   atlas_public_release_citation_final_certificate :
     type_theory_atlas_public_final_certificate;
+  atlas_public_release_citation_release_summary :
+    type_theory_atlas_release_summary;
   atlas_public_release_citation_paper_statement :
     type_theory_atlas_paper_statement
 }.
@@ -11922,6 +11924,7 @@ Proof.
   - apply type_theory_atlas_public_release_paper_route_gives_certificate.
   - apply type_theory_atlas_public_release_paper_route_entry_gives_final_public_theorem.
   - apply type_theory_atlas_public_release_paper_route_entry_gives_final_certificate.
+  - apply type_theory_atlas_release_summary_holds.
   - apply type_theory_atlas_public_release_paper_route_entry_gives_paper_statement.
 Qed.
 
@@ -11964,6 +11967,13 @@ Corollary type_theory_atlas_public_release_citation_gives_final_certificate :
   type_theory_atlas_public_final_certificate.
 Proof.
   exact (atlas_public_release_citation_final_certificate
+    type_theory_atlas_public_release_citation_certificate_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_citation_gives_release_summary :
+  type_theory_atlas_release_summary.
+Proof.
+  exact (atlas_public_release_citation_release_summary
     type_theory_atlas_public_release_citation_certificate_holds).
 Qed.
 
@@ -12028,6 +12038,13 @@ Corollary type_theory_atlas_public_release_paper_ready_release_gives_final_certi
   type_theory_atlas_public_final_certificate.
 Proof.
   exact (atlas_public_release_citation_final_certificate
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_release_summary :
+  type_theory_atlas_release_summary.
+Proof.
+  exact (atlas_public_release_citation_release_summary
     type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
 Qed.
 
