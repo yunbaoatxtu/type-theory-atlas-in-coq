@@ -20,6 +20,8 @@ Current top-level entry points:
   `type_theory_atlas_public_release_complete_certificate_holds`;
 - public release manifest:
   `type_theory_atlas_public_release_manifest_holds`;
+- public release paper-ready release:
+  `type_theory_atlas_public_release_paper_ready_release_holds`;
 - public release citation certificate:
   `type_theory_atlas_public_release_citation_certificate_holds`;
 - final public release verification:
@@ -115,6 +117,7 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_complete_holds`,
   `type_theory_atlas_public_release_complete_certificate_holds`,
   `type_theory_atlas_public_release_manifest_holds`,
+  `type_theory_atlas_public_release_paper_ready_release_holds`,
   `type_theory_atlas_public_release_citation_certificate_holds`,
   `type_theory_atlas_automation_done_dashboard_certificate_holds`,
   `type_theory_atlas_automation_done_holds`,
@@ -887,6 +890,17 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_citation_gives_final_public_theorem`,
   `type_theory_atlas_public_release_citation_gives_final_certificate`, and
   `type_theory_atlas_public_release_citation_gives_paper_statement`.
+- Public release paper-ready release:
+  `type_theory_atlas_public_release_paper_ready_release`,
+  `type_theory_atlas_public_release_paper_ready_release_holds`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_manifest`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_complete`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_paper_route`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_paper_route_certificate`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_final_public_theorem`,
+  `type_theory_atlas_public_release_paper_ready_release_gives_final_certificate`, and
+  `type_theory_atlas_public_release_paper_ready_release_gives_paper_statement`.
 - Build status checks:
   `make check`, which runs the environment check, README entry consistency
   check, top-level entry sync check across the README overview, Build Status
@@ -901,17 +915,18 @@ The README-facing entry names are kept aligned with
   public release paper route check, public release paper route entry projection
   check, public GitHub homepage snippet check, public GitHub repository sync
   check, public release citation check, public release citation sync check,
-  public release citation certificate check, public README release package
-  check, public release final entry check, public README release map check,
-  public release navigation check, public release checklist check, public source
-  hygiene check, public release final package check, file-order check, clean
-  rebuild, and unfinished-proof scan.
+  public release citation certificate check, public release paper-ready release
+  check, public README release package check, public release final entry check,
+  public README release map check, public release navigation check, public
+  release checklist check, public source hygiene check, public release final
+  package check, file-order check, clean rebuild, and unfinished-proof scan.
   The public README release package check covers the public release manifest,
   public release manifest stage field/projection order, public release complete
   certificate, public release complete entry projections, public release paper
   route, public release paper route entry projections, homepage summary,
   homepage verification note, GitHub homepage snippet, GitHub repository sync,
-  public release citation, citation sync, and citation certificate.
+  public release citation, citation sync, citation certificate, and paper-ready
+  release.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
   release checklist, public source hygiene, expanded verification form,
@@ -2307,6 +2322,7 @@ Coq release manifest: type_theory_atlas_public_release_manifest_holds
 Coq release complete: type_theory_atlas_public_release_complete_holds
 Coq paper route: type_theory_atlas_public_release_paper_route_holds
 Coq citation certificate: type_theory_atlas_public_release_citation_certificate_holds
+Coq paper-ready release: type_theory_atlas_public_release_paper_ready_release_holds
 ```
 
 This citation points to the Coq-checked public release manifest, which packages
@@ -2314,7 +2330,8 @@ the unified syntax framework, MLTT, UTT, TDTT, system translations, metatheory,
 and paper-facing statement into one release handle. The citation certificate
 packages the manifest, release-complete entry, paper route, final public
 theorem, final certificate, and paper-facing statement into one citation-ready
-Coq handle.
+Coq handle. The paper-ready release theorem is the shortest Coq theorem for
+paper-facing citation of the same package.
 
 ## Build Status Summary
 
@@ -2328,6 +2345,8 @@ The current public release manifest entry point is
 `type_theory_atlas_public_release_manifest_holds`.
 The current public release citation certificate entry point is
 `type_theory_atlas_public_release_citation_certificate_holds`.
+The current public release paper-ready release entry point is
+`type_theory_atlas_public_release_paper_ready_release_holds`.
 The current public release complete certificate entry point is
 `type_theory_atlas_public_release_complete_certificate_holds`.
 The current daily automation report-complete entry point is
@@ -2430,6 +2449,7 @@ The expected verification story is:
 - public release citation check: `make check-public-release-citation`;
 - public release citation sync check: `make check-public-release-citation-sync`;
 - public release citation certificate check: `make check-public-release-citation-certificate`;
+- public release paper-ready release check: `make check-public-release-paper-ready-release`;
 - public README release package check: `make check-public-readme-release-package`;
 - public release final entry check: `make check-public-release-final-entry`;
 - public README release map check: `make check-public-readme-release-map`;

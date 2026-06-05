@@ -11973,3 +11973,67 @@ Proof.
   exact (atlas_public_release_citation_paper_statement
     type_theory_atlas_public_release_citation_certificate_holds).
 Qed.
+
+Definition type_theory_atlas_public_release_paper_ready_release : Prop :=
+  type_theory_atlas_public_release_citation_certificate.
+
+Theorem type_theory_atlas_public_release_paper_ready_release_holds :
+  type_theory_atlas_public_release_paper_ready_release.
+Proof.
+  apply type_theory_atlas_public_release_citation_certificate_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate :
+  type_theory_atlas_public_release_citation_certificate.
+Proof.
+  apply type_theory_atlas_public_release_paper_ready_release_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_manifest :
+  type_theory_atlas_public_release_manifest.
+Proof.
+  exact (atlas_public_release_citation_manifest
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_citation_complete
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_paper_route :
+  type_theory_atlas_public_release_paper_route.
+Proof.
+  exact (atlas_public_release_citation_paper_route
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_paper_route_certificate :
+  type_theory_atlas_public_release_paper_route_certificate.
+Proof.
+  exact (atlas_public_release_citation_paper_route_certificate
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_final_public_theorem :
+  type_theory_atlas_final_public_theorem.
+Proof.
+  exact (atlas_public_release_citation_final_public_theorem
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_final_certificate :
+  type_theory_atlas_public_final_certificate.
+Proof.
+  exact (atlas_public_release_citation_final_certificate
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_ready_release_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_citation_paper_statement
+    type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
+Qed.
