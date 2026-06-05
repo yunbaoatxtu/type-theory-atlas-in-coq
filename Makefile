@@ -1,4 +1,4 @@
-.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-release-complete check-public-release-complete-entry-projections check-public-release-paper-route-entry check-public-release-paper-route check-public-release-paper-route-entry-projections check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-release-citation-certificate check-public-release-paper-ready-release check-public-release-export-table check-public-release-acceptance-certificate check-public-release-one-click-entry check-public-release-final-index check-public-release-homepage-index check-public-release-quick-start check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
+.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-release-complete check-public-release-complete-entry-projections check-public-release-paper-route-entry check-public-release-paper-route check-public-release-paper-route-entry-projections check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-release-citation-certificate check-public-release-paper-ready-release check-public-release-export-table check-public-release-acceptance-certificate check-public-release-one-click-entry check-public-release-final-index check-public-release-homepage-index check-public-release-quick-start check-public-release-sync-summary check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
 
 ROCQ_PLATFORM_RESOURCES := $(firstword \
 	$(wildcard /Applications/Rocq-Platform~*.app/Contents/Resources) \
@@ -102,6 +102,8 @@ help:
 	@echo "                    Check public release homepage index"
 	@echo "  make check-public-release-quick-start"
 	@echo "                    Check public release quick start"
+	@echo "  make check-public-release-sync-summary"
+	@echo "                    Check public release sync summary"
 	@echo "  make check-public-readme-release-package"
 	@echo "                    Check public README release package"
 	@echo "  make check-public-release-final-entry"
@@ -186,6 +188,7 @@ check-daily-top-levels:
 		type_theory_atlas_public_release_final_index_holds \
 		type_theory_atlas_public_release_homepage_index_holds \
 		type_theory_atlas_public_release_quick_start_holds \
+		type_theory_atlas_public_release_sync_summary_holds \
 		type_theory_atlas_public_release_citation_certificate_holds \
 		type_theory_atlas_daily_automation_report_complete_holds \
 		type_theory_atlas_automation_done_dashboard_certificate_holds \
@@ -1435,7 +1438,8 @@ check-public-homepage-summary:
 		'type_theory_atlas_public_release_manifest_holds' \
 		'type_theory_atlas_public_release_final_index_holds' \
 		'type_theory_atlas_public_release_homepage_index_holds' \
-		'type_theory_atlas_public_release_quick_start_holds'; do \
+		'type_theory_atlas_public_release_quick_start_holds' \
+		'type_theory_atlas_public_release_sync_summary_holds'; do \
 		if ! sed -n '/^## Homepage Summary/,/^## Public Release Citation/p' README.md | rg -q "$$phrase"; then \
 			echo "Homepage summary is missing: $$phrase"; \
 			missing=1; \
@@ -1489,6 +1493,7 @@ check-public-github-homepage-snippet:
 		'type_theory_atlas_public_release_final_index_holds' \
 		'type_theory_atlas_public_release_homepage_index_holds' \
 		'type_theory_atlas_public_release_quick_start_holds' \
+		'type_theory_atlas_public_release_sync_summary_holds' \
 		'type_theory_atlas_public_release_complete_certificate_holds' \
 		'type_theory_atlas_public_release_complete_holds' \
 		'type_theory_atlas_public_release_paper_route_holds' \
@@ -1590,7 +1595,11 @@ check-public-release-citation:
 		echo "Public release citation does not name the quick-start release theorem."; \
 		exit 1; \
 	fi
-	@echo "Public release citation snippet names the title, homepage, Coq release manifest, complete theorem, paper route theorem, citation certificate, export table, acceptance certificate, one-click entry, final index, homepage index, and quick start."
+	@if ! sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_sync_summary_holds'; then \
+		echo "Public release citation does not name the sync summary."; \
+		exit 1; \
+	fi
+	@echo "Public release citation snippet names the title, homepage, Coq release manifest, complete theorem, paper route theorem, citation certificate, export table, acceptance certificate, one-click entry, final index, homepage index, quick start, and sync summary."
 
 check-public-release-citation-sync:
 	@command -v rg >/dev/null || \
@@ -1614,6 +1623,7 @@ check-public-release-citation-sync:
 		sed -n 's/^Theorem \(type_theory_atlas_public_release_final_index_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
 		sed -n 's/^Theorem \(type_theory_atlas_public_release_homepage_index_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
 		sed -n 's/^Theorem \(type_theory_atlas_public_release_quick_start_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
+		sed -n 's/^Theorem \(type_theory_atlas_public_release_sync_summary_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
 	} | sort -u > "$$expected"; \
 	{ \
 		sed -n '/^## Homepage Summary/,/^## Public Release Citation/p' README.md | \
@@ -1652,19 +1662,22 @@ check-public-release-citation-sync:
 		sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | \
 			grep -Eo 'Coq quick start: [A-Za-z_][A-Za-z0-9_]*' | \
 			sed 's/Coq quick start: //'; \
+		sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | \
+			grep -Eo 'Coq sync summary: [A-Za-z_][A-Za-z0-9_]*' | \
+			sed 's/Coq sync summary: //'; \
 		sed -n '/^The current public release complete entry point is/,/^The current daily automation report-complete entry point is/p' README.md | \
 			grep -Eo '`[A-Za-z_][A-Za-z0-9_]*`' | tr -d '`'; \
 	} | sort -u > "$$actual"; \
-	if [ "$$(wc -l < "$$expected" | tr -d ' ')" -ne 13 ]; then \
-		echo "Coq public release manifest/complete/paper-route/citation/paper-ready/export-table/acceptance/one-click/final-index/homepage-index/quick-start declarations are missing or ambiguous."; \
+	if [ "$$(wc -l < "$$expected" | tr -d ' ')" -ne 14 ]; then \
+		echo "Coq public release manifest/complete/paper-route/citation/paper-ready/export-table/acceptance/one-click/final-index/homepage-index/quick-start/sync-summary declarations are missing or ambiguous."; \
 		rm -f "$$expected" "$$actual"; \
 		exit 1; \
 	fi; \
 	if diff -u "$$expected" "$$actual"; then \
-		echo "Public release citation references match the Coq release manifest, complete entries, paper route entries, citation certificate, paper-ready release, export table, acceptance certificate, one-click entry, final index, homepage index, and quick start."; \
+		echo "Public release citation references match the Coq release manifest, complete entries, paper route entries, citation certificate, paper-ready release, export table, acceptance certificate, one-click entry, final index, homepage index, quick start, and sync summary."; \
 		rm -f "$$expected" "$$actual"; \
 	else \
-		echo "Public release citation references do not match the Coq release manifest, complete entries, paper route entries, citation certificate, paper-ready release, export table, acceptance certificate, one-click entry, final index, homepage index, and quick start."; \
+		echo "Public release citation references do not match the Coq release manifest, complete entries, paper route entries, citation certificate, paper-ready release, export table, acceptance certificate, one-click entry, final index, homepage index, quick start, and sync summary."; \
 		rm -f "$$expected" "$$actual"; \
 		exit 1; \
 	fi
@@ -1921,6 +1934,37 @@ check-public-release-quick-start:
 	if [ "$$missing" -ne 0 ]; then exit 1; fi; \
 	echo "Public release quick start names are documented and present in Metatheory.v."
 
+check-public-release-sync-summary:
+	@command -v rg >/dev/null || \
+		(echo "Missing rg: install ripgrep before checking the public release sync summary." && exit 1)
+	@if ! rg -q 'public release sync summary check: `make check-public-release-sync-summary`' README.md; then \
+		echo "README build status summary does not name the public release sync summary check."; \
+		exit 1; \
+	fi
+	@missing=0; \
+	for entry in \
+		type_theory_atlas_public_release_sync_summary \
+		type_theory_atlas_public_release_sync_summary_holds \
+		type_theory_atlas_public_release_sync_summary_gives_quick_start \
+		type_theory_atlas_public_release_sync_summary_gives_homepage_index \
+		type_theory_atlas_public_release_sync_summary_gives_final_index \
+		type_theory_atlas_public_release_sync_summary_gives_manifest \
+		type_theory_atlas_public_release_sync_summary_gives_daily_report \
+		type_theory_atlas_public_release_sync_summary_gives_complete \
+		type_theory_atlas_public_release_sync_summary_gives_release_summary \
+		type_theory_atlas_public_release_sync_summary_gives_paper_statement; do \
+		if ! rg -q "^(Theorem|Corollary|Record|Definition|Lemma) $${entry}\\b" theories/Atlas/Metatheory.v; then \
+			echo "Missing public release sync summary entry in theories/Atlas/Metatheory.v: $$entry"; \
+			missing=1; \
+		fi; \
+		if ! rg -q "$${entry}" README.md; then \
+			echo "Missing public release sync summary entry in README.md: $$entry"; \
+			missing=1; \
+		fi; \
+	done; \
+	if [ "$$missing" -ne 0 ]; then exit 1; fi; \
+	echo "Public release sync summary names are documented and present in Metatheory.v."
+
 check-public-readme-release-package:
 	@command -v rg >/dev/null || \
 		(echo "Missing rg: install ripgrep before checking the public README release package." && exit 1)
@@ -1949,6 +1993,7 @@ check-public-readme-release-package:
 	@$(MAKE) check-public-release-final-index
 	@$(MAKE) check-public-release-homepage-index
 	@$(MAKE) check-public-release-quick-start
+	@$(MAKE) check-public-release-sync-summary
 	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_manifest_holds'; then \
 		echo "Public README release package does not include the release manifest theorem."; \
 		exit 1; \
@@ -1981,7 +2026,7 @@ check-public-readme-release-package:
 		echo "README expanded verification form does not include the public README release package check or final release wrapper."; \
 		exit 1; \
 	fi
-	@echo "Public README release package checks homepage summary, GitHub snippet, citation, citation sync, citation certificate, paper-ready release, export table, acceptance certificate, one-click entry, final index, homepage index, quick start, manifest, release-complete certificate, release-complete entry projections, paper route entry, paper route, paper route entry projections, stage field/projection order, and verification entry."
+	@echo "Public README release package checks homepage summary, GitHub snippet, citation, citation sync, citation certificate, paper-ready release, export table, acceptance certificate, one-click entry, final index, homepage index, quick start, sync summary, manifest, release-complete certificate, release-complete entry projections, paper route entry, paper route, paper route entry projections, stage field/projection order, and verification entry."
 
 check-public-release-final-entry:
 	@command -v rg >/dev/null || \
@@ -2107,9 +2152,10 @@ check-public-release-checklist:
 		'- Coq one-click release theorem: `type_theory_atlas_public_release_one_click_entry_holds`;' \
 		'- Coq final public release index: `type_theory_atlas_public_release_final_index_holds`;' \
 		'- Coq homepage release index: `type_theory_atlas_public_release_homepage_index_holds`;' \
-		'- Coq quick-start release theorem: `type_theory_atlas_public_release_quick_start_holds`.' > "$$expected"; \
+		'- Coq quick-start release theorem: `type_theory_atlas_public_release_quick_start_holds`;' \
+		'- Coq public release sync summary: `type_theory_atlas_public_release_sync_summary_holds`.' > "$$expected"; \
 	sed -n '/^The public release checklist is:/,/^The expected verification story is:/p' README.md | \
-		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release paper route theorem|Coq release paper route certificate|Coq release complete certificate|Coq release citation certificate|Coq paper-ready release theorem|Coq release acceptance certificate|Coq one-click release theorem|Coq final public release index|Coq homepage release index|Coq quick-start release theorem):' > "$$actual"; \
+		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release paper route theorem|Coq release paper route certificate|Coq release complete certificate|Coq release citation certificate|Coq paper-ready release theorem|Coq release acceptance certificate|Coq one-click release theorem|Coq final public release index|Coq homepage release index|Coq quick-start release theorem|Coq public release sync summary):' > "$$actual"; \
 	if diff -u "$$expected" "$$actual"; then \
 		echo "Public release checklist matches the reusable release commands and theorem."; \
 		rm -f "$$expected" "$$actual"; \
@@ -2174,7 +2220,7 @@ check-public-release-final-package:
 	@$(MAKE) check-expanded-verification-sync
 	@$(MAKE) check-help-readme-sync
 	@$(MAKE) check-phony-help-sync
-	@echo "Final public release package checks release content, release-complete certificate, acceptance certificate, final index, homepage index, quick start, source hygiene, release checklist, README release map, README navigation, expanded verification, help/README sync, and .PHONY/help sync."
+	@echo "Final public release package checks release content, release-complete certificate, acceptance certificate, final index, homepage index, quick start, sync summary, source hygiene, release checklist, README release map, README navigation, expanded verification, help/README sync, and .PHONY/help sync."
 
 check-expanded-verification-sync:
 	@command -v rg >/dev/null || \

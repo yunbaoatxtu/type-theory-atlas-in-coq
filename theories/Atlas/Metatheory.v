@@ -12599,3 +12599,92 @@ Proof.
   exact (atlas_public_release_quick_start_paper_statement
     type_theory_atlas_public_release_quick_start_holds).
 Qed.
+
+Record type_theory_atlas_public_release_sync_summary : Prop := {
+  atlas_public_release_sync_quick_start :
+    type_theory_atlas_public_release_quick_start;
+  atlas_public_release_sync_homepage_index :
+    type_theory_atlas_public_release_homepage_index;
+  atlas_public_release_sync_final_index :
+    type_theory_atlas_public_release_final_index;
+  atlas_public_release_sync_manifest :
+    type_theory_atlas_public_release_manifest;
+  atlas_public_release_sync_daily_report :
+    type_theory_atlas_daily_automation_report_complete;
+  atlas_public_release_sync_complete :
+    type_theory_atlas_public_release_complete;
+  atlas_public_release_sync_release_summary :
+    type_theory_atlas_release_summary;
+  atlas_public_release_sync_paper_statement :
+    type_theory_atlas_paper_statement
+}.
+
+Theorem type_theory_atlas_public_release_sync_summary_holds :
+  type_theory_atlas_public_release_sync_summary.
+Proof.
+  constructor.
+  - apply type_theory_atlas_public_release_quick_start_holds.
+  - apply type_theory_atlas_public_release_quick_start_gives_homepage_index.
+  - apply type_theory_atlas_public_release_quick_start_gives_final_index.
+  - apply type_theory_atlas_public_release_final_index_gives_manifest.
+  - apply type_theory_atlas_public_release_manifest_gives_daily_report.
+  - apply type_theory_atlas_public_release_quick_start_gives_complete.
+  - apply type_theory_atlas_public_release_final_index_gives_release_summary.
+  - apply type_theory_atlas_public_release_quick_start_gives_paper_statement.
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_quick_start :
+  type_theory_atlas_public_release_quick_start.
+Proof.
+  exact (atlas_public_release_sync_quick_start
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_homepage_index :
+  type_theory_atlas_public_release_homepage_index.
+Proof.
+  exact (atlas_public_release_sync_homepage_index
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_final_index :
+  type_theory_atlas_public_release_final_index.
+Proof.
+  exact (atlas_public_release_sync_final_index
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_manifest :
+  type_theory_atlas_public_release_manifest.
+Proof.
+  exact (atlas_public_release_sync_manifest
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_daily_report :
+  type_theory_atlas_daily_automation_report_complete.
+Proof.
+  exact (atlas_public_release_sync_daily_report
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_sync_complete
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_release_summary :
+  type_theory_atlas_release_summary.
+Proof.
+  exact (atlas_public_release_sync_release_summary
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_sync_summary_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_sync_paper_statement
+    type_theory_atlas_public_release_sync_summary_holds).
+Qed.
