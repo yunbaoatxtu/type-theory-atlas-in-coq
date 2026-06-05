@@ -11701,6 +11701,20 @@ Proof.
     type_theory_atlas_public_release_paper_route_certificate_holds).
 Qed.
 
+Corollary type_theory_atlas_public_release_paper_route_gives_final_public_theorem :
+  type_theory_atlas_final_public_theorem.
+Proof.
+  exact (atlas_public_release_complete_final_public_theorem
+    type_theory_atlas_public_release_paper_route_gives_complete).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_route_gives_final_certificate :
+  type_theory_atlas_public_final_certificate.
+Proof.
+  exact (atlas_public_release_complete_final_certificate
+    type_theory_atlas_public_release_paper_route_gives_complete).
+Qed.
+
 Corollary type_theory_atlas_public_release_paper_route_gives_stage1_unified_syntax :
   type_theory_atlas_coverage.
 Proof.
@@ -11786,6 +11800,27 @@ Corollary type_theory_atlas_public_release_paper_route_gives_certificate :
   type_theory_atlas_public_release_paper_route_certificate.
 Proof.
   apply type_theory_atlas_public_release_paper_route_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_route_entry_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_paper_route_complete
+    type_theory_atlas_public_release_paper_route_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_route_entry_gives_final_public_theorem :
+  type_theory_atlas_final_public_theorem.
+Proof.
+  exact (atlas_public_release_complete_final_public_theorem
+    type_theory_atlas_public_release_paper_route_entry_gives_complete).
+Qed.
+
+Corollary type_theory_atlas_public_release_paper_route_entry_gives_final_certificate :
+  type_theory_atlas_public_final_certificate.
+Proof.
+  exact (atlas_public_release_complete_final_certificate
+    type_theory_atlas_public_release_paper_route_entry_gives_complete).
 Qed.
 
 Corollary type_theory_atlas_public_release_paper_route_entry_gives_stage1_unified_syntax :

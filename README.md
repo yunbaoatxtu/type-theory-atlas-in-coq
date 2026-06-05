@@ -849,6 +849,8 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_paper_route_certificate_holds`,
   `type_theory_atlas_public_release_complete_gives_paper_route_certificate`,
   `type_theory_atlas_public_release_paper_route_gives_complete`,
+  `type_theory_atlas_public_release_paper_route_gives_final_public_theorem`,
+  `type_theory_atlas_public_release_paper_route_gives_final_certificate`,
   `type_theory_atlas_public_release_paper_route_gives_stage1_unified_syntax`,
   `type_theory_atlas_public_release_paper_route_gives_stage2_mltt`,
   `type_theory_atlas_public_release_paper_route_gives_stage3_utt`,
@@ -859,6 +861,9 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_paper_route_gives_stage6_metatheory`, and
   `type_theory_atlas_public_release_paper_route_gives_paper_statement`.
 - Public release paper route entry projections:
+  `type_theory_atlas_public_release_paper_route_entry_gives_complete`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_final_public_theorem`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_final_certificate`,
   `type_theory_atlas_public_release_paper_route_entry_gives_stage1_unified_syntax`,
   `type_theory_atlas_public_release_paper_route_entry_gives_stage2_mltt`,
   `type_theory_atlas_public_release_paper_route_entry_gives_stage3_utt`,
@@ -2211,7 +2216,8 @@ main metatheory theorem, and paper-facing statement for paper-level citation.
 The theorem `type_theory_atlas_public_release_paper_route_holds` is the
 shortest paper-route theorem alias for that certificate.
 Its `type_theory_atlas_public_release_paper_route_entry_gives_*` projections
-expose the same stage route and paper-facing statement directly from the short
+expose the release-complete certificate, final public theorem, final
+certificate, stage route, and paper-facing statement directly from the short
 paper route entry.
 
 ## Homepage Summary

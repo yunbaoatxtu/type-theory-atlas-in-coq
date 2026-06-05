@@ -1289,6 +1289,8 @@ check-public-release-paper-route:
 		type_theory_atlas_public_release_paper_route_certificate_holds \
 		type_theory_atlas_public_release_complete_gives_paper_route_certificate \
 		type_theory_atlas_public_release_paper_route_gives_complete \
+		type_theory_atlas_public_release_paper_route_gives_final_public_theorem \
+		type_theory_atlas_public_release_paper_route_gives_final_certificate \
 		type_theory_atlas_public_release_paper_route_gives_stage1_unified_syntax \
 		type_theory_atlas_public_release_paper_route_gives_stage2_mltt \
 		type_theory_atlas_public_release_paper_route_gives_stage3_utt \
@@ -1346,6 +1348,9 @@ check-public-release-paper-route-entry-projections:
 	fi
 	@expected=$$(mktemp); coq_actual=$$(mktemp); readme_actual=$$(mktemp); \
 	printf '%s\n' \
+		type_theory_atlas_public_release_paper_route_entry_gives_complete \
+		type_theory_atlas_public_release_paper_route_entry_gives_final_public_theorem \
+		type_theory_atlas_public_release_paper_route_entry_gives_final_certificate \
 		type_theory_atlas_public_release_paper_route_entry_gives_stage1_unified_syntax \
 		type_theory_atlas_public_release_paper_route_entry_gives_stage2_mltt \
 		type_theory_atlas_public_release_paper_route_entry_gives_stage3_utt \
@@ -1355,10 +1360,11 @@ check-public-release-paper-route-entry-projections:
 		type_theory_atlas_public_release_paper_route_entry_gives_stage5_translation_reliability \
 		type_theory_atlas_public_release_paper_route_entry_gives_stage6_metatheory \
 		type_theory_atlas_public_release_paper_route_entry_gives_paper_statement > "$$expected"; \
-	sed -n '/^Corollary type_theory_atlas_public_release_paper_route_entry_gives_stage1_unified_syntax/,/^Corollary type_theory_atlas_public_release_paper_route_entry_gives_paper_statement/p' theories/Atlas/Metatheory.v | \
-		grep -Eo 'type_theory_atlas_public_release_paper_route_entry_gives_(stage[0-9][A-Za-z0-9_]*|paper_statement)' > "$$coq_actual"; \
+	sed -n '/^Corollary type_theory_atlas_public_release_paper_route_entry_gives_complete/,/^Corollary type_theory_atlas_public_release_paper_route_entry_gives_paper_statement/p' theories/Atlas/Metatheory.v | \
+		grep -Eo '^Corollary type_theory_atlas_public_release_paper_route_entry_gives_(complete|final_public_theorem|final_certificate|stage[0-9][A-Za-z0-9_]*|paper_statement)' | \
+		sed 's/^Corollary //' > "$$coq_actual"; \
 	sed -n '/^- Public release paper route entry projections:/,/^- Build status checks:/p' README.md | \
-		grep -Eo '`type_theory_atlas_public_release_paper_route_entry_gives_(stage[0-9][A-Za-z0-9_]*|paper_statement)`' | \
+		grep -Eo '`type_theory_atlas_public_release_paper_route_entry_gives_(complete|final_public_theorem|final_certificate|stage[0-9][A-Za-z0-9_]*|paper_statement)`' | \
 		tr -d '`' > "$$readme_actual"; \
 	if ! diff -u "$$expected" "$$coq_actual"; then \
 		echo "Coq public release paper route entry projections are not in the expected order."; \
