@@ -10,6 +10,8 @@ metatheory.
 
 Current top-level entry points:
 
+- public release complete certificate:
+  `type_theory_atlas_public_release_complete_certificate_holds`;
 - public release manifest:
   `type_theory_atlas_public_release_manifest_holds`;
 - final public release verification:
@@ -100,6 +102,7 @@ The README-facing entry names are kept aligned with
 `theories/Atlas/Metatheory.v` as follows:
 
 - Current top-level entries:
+  `type_theory_atlas_public_release_complete_certificate_holds`,
   `type_theory_atlas_automation_done_dashboard_certificate_holds`,
   `type_theory_atlas_automation_done_holds`,
   `type_theory_atlas_final_public_theorem_holds`,
@@ -798,6 +801,24 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_manifest_gives_stage5_translation_reliability`,
   `type_theory_atlas_public_release_manifest_gives_stage6_metatheory`, and
   `type_theory_atlas_public_release_manifest_gives_paper_statement`.
+- Public release complete certificate:
+  `type_theory_atlas_public_release_complete_certificate`,
+  `type_theory_atlas_public_release_complete_certificate_holds`,
+  `type_theory_atlas_public_release_manifest_gives_complete_certificate`,
+  `type_theory_atlas_public_release_complete_gives_manifest`,
+  `type_theory_atlas_public_release_complete_gives_daily_report`,
+  `type_theory_atlas_public_release_complete_gives_dashboard`,
+  `type_theory_atlas_public_release_complete_gives_final_public_theorem`,
+  `type_theory_atlas_public_release_complete_gives_final_certificate`,
+  `type_theory_atlas_public_release_complete_gives_stage1_unified_syntax`,
+  `type_theory_atlas_public_release_complete_gives_stage2_mltt`,
+  `type_theory_atlas_public_release_complete_gives_stage3_utt`,
+  `type_theory_atlas_public_release_complete_gives_stage4_tdtt_typing`,
+  `type_theory_atlas_public_release_complete_gives_stage4_tdtt_dashboard`,
+  `type_theory_atlas_public_release_complete_gives_stage5_system_embeddings`,
+  `type_theory_atlas_public_release_complete_gives_stage5_translation_reliability`,
+  `type_theory_atlas_public_release_complete_gives_stage6_metatheory`, and
+  `type_theory_atlas_public_release_complete_gives_paper_statement`.
 - Build status checks:
   `make check`, which runs the environment check, README entry consistency
   check, top-level entry sync check across the README overview, Build Status
@@ -807,16 +828,17 @@ The README-facing entry names are kept aligned with
   stage-route check, daily final stage-sync check, daily automation summary
   check, daily automation report-complete check, daily automation report
   stage-order check, daily automation report sync check, public release
-  manifest stage-sync check, public GitHub homepage snippet check, public
+  manifest check, public release manifest stage-sync check, public release
+  complete certificate check, public GitHub homepage snippet check, public
   GitHub repository sync check, public release citation sync check, public
   README release package check, public release final entry check, public README
   release map check, public release navigation check, public release checklist
   check, public source hygiene check, public release final package check,
   file-order check, clean rebuild, and unfinished-proof scan.
   The public README release package check covers the public release manifest,
-  public release manifest stage field/projection order, homepage summary,
-  homepage verification note, GitHub homepage snippet, GitHub repository sync,
-  public release citation, and citation sync.
+  public release manifest stage field/projection order, public release complete
+  certificate, homepage summary, homepage verification note, GitHub homepage
+  snippet, GitHub repository sync, public release citation, and citation sync.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
   release checklist, public source hygiene, expanded verification form,
@@ -2121,6 +2143,10 @@ The theorem `type_theory_atlas_public_release_manifest_holds` is the compact
 public release manifest: it packages the daily report, dashboard, final public
 theorem, final certificate, stage-route, metatheory, and paper-facing statement
 into one citation-ready Coq handle.
+The theorem `type_theory_atlas_public_release_complete_certificate_holds`
+packages that citation-ready manifest with the final public theorem, final
+certificate, daily report, dashboard, stage-route components, metatheory, and
+paper-facing statement into one release-complete Coq handle.
 
 ## Homepage Summary
 
@@ -2133,7 +2159,11 @@ metatheory through reusable proof certificates.
 Verified stage route: unified syntax framework -> MLTT -> UTT -> TDTT ->
 system translations -> metatheory.
 
-Final Coq entry point: `type_theory_atlas_public_release_manifest_holds`.
+Final Coq entry point:
+`type_theory_atlas_public_release_complete_certificate_holds`.
+
+Release manifest entry point:
+`type_theory_atlas_public_release_manifest_holds`.
 
 Verification entry point: `make check` runs the complete verification suite,
 including README consistency checks, Coq clean rebuild, and unfinished-proof
@@ -2150,6 +2180,9 @@ certificates.
 Verified route: unified syntax framework -> MLTT -> UTT -> TDTT -> system translations -> metatheory.
 
 Release manifest theorem: `type_theory_atlas_public_release_manifest_holds`.
+
+Release complete certificate:
+`type_theory_atlas_public_release_complete_certificate_holds`.
 
 Release package check: `make check-public-release-final-package`.
 
@@ -2176,6 +2209,8 @@ and paper-facing statement into one release handle.
 
 The current public release manifest entry point is
 `type_theory_atlas_public_release_manifest_holds`.
+The current public release complete certificate entry point is
+`type_theory_atlas_public_release_complete_certificate_holds`.
 The current daily automation report-complete entry point is
 `type_theory_atlas_daily_automation_report_complete_holds`.
 The current automation-done dashboard entry point is
@@ -2236,7 +2271,8 @@ The public release checklist is:
 - full daily verification: `make check`;
 - clean Coq rebuild: `make clean && make -j1`;
 - unfinished-proof scan: `make check-no-admits`;
-- Coq release manifest theorem: `type_theory_atlas_public_release_manifest_holds`.
+- Coq release manifest theorem: `type_theory_atlas_public_release_manifest_holds`;
+- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.
 
 The expected verification story is:
 
@@ -2260,6 +2296,7 @@ The expected verification story is:
 - daily automation report sync check: `make check-daily-automation-report-sync`;
 - public release manifest check: `make check-public-release-manifest`;
 - public release manifest stage-sync check: `make check-public-release-manifest-stage-sync`;
+- public release complete certificate check: `make check-public-release-complete`;
 - public homepage summary check: `make check-public-homepage-summary`;
 - public homepage verification check: `make check-public-homepage-verification`;
 - public GitHub homepage snippet check: `make check-public-github-homepage-snippet`;
