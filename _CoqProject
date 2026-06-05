@@ -1,0 +1,22 @@
+-Q theories Atlas
+
+theories/Atlas/Syntax.v
+theories/Atlas/Ops.v
+theories/Atlas/Context.v
+theories/Atlas/DefEq.v
+theories/Atlas/MLTT.v
+theories/Atlas/Weakening.v
+theories/Atlas/Substitution.v
+theories/Atlas/UTT.v
+theories/Atlas/UTTWeakening.v
+theories/Atlas/UTTSubstitution.v
+theories/Atlas/TemporalContext.v
+theories/Atlas/TDTT.v
+theories/Atlas/TDTTTemporalWeakening.v
+theories/Atlas/TDTTTemporalSubstitution.v
+theories/Atlas/TDTTWeakening.v
+theories/Atlas/TDTTSubstitution.v
+theories/Atlas/DelayedSubstitution.v
+theories/Atlas/Translations.v
+theories/Atlas/Inversion.v
+theories/Atlas/Metatheory.v
