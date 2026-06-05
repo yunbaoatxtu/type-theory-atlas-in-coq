@@ -24,6 +24,8 @@ Current top-level entry points:
   `type_theory_atlas_public_release_paper_ready_release_holds`;
 - public release export table:
   `type_theory_atlas_public_release_export_table_holds`;
+- public release acceptance certificate:
+  `type_theory_atlas_public_release_acceptance_certificate_holds`;
 - public release citation certificate:
   `type_theory_atlas_public_release_citation_certificate_holds`;
 - final public release verification:
@@ -121,6 +123,7 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_manifest_holds`,
   `type_theory_atlas_public_release_paper_ready_release_holds`,
   `type_theory_atlas_public_release_export_table_holds`,
+  `type_theory_atlas_public_release_acceptance_certificate_holds`,
   `type_theory_atlas_public_release_citation_certificate_holds`,
   `type_theory_atlas_automation_done_dashboard_certificate_holds`,
   `type_theory_atlas_automation_done_holds`,
@@ -919,6 +922,19 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_export_table_gives_final_certificate`,
   `type_theory_atlas_public_release_export_table_gives_release_summary`, and
   `type_theory_atlas_public_release_export_table_gives_paper_statement`.
+- Public release acceptance certificate:
+  `type_theory_atlas_public_release_acceptance_certificate`,
+  `type_theory_atlas_public_release_acceptance_certificate_holds`,
+  `type_theory_atlas_public_release_acceptance_gives_export_table`,
+  `type_theory_atlas_public_release_acceptance_gives_paper_ready_release`,
+  `type_theory_atlas_public_release_acceptance_gives_citation_certificate`,
+  `type_theory_atlas_public_release_acceptance_gives_manifest`,
+  `type_theory_atlas_public_release_acceptance_gives_complete`,
+  `type_theory_atlas_public_release_acceptance_gives_paper_route`,
+  `type_theory_atlas_public_release_acceptance_gives_final_public_theorem`,
+  `type_theory_atlas_public_release_acceptance_gives_final_certificate`,
+  `type_theory_atlas_public_release_acceptance_gives_release_summary`, and
+  `type_theory_atlas_public_release_acceptance_gives_paper_statement`.
 - Build status checks:
   `make check`, which runs the environment check, README entry consistency
   check, top-level entry sync check across the README overview, Build Status
@@ -934,7 +950,8 @@ The README-facing entry names are kept aligned with
   check, public GitHub homepage snippet check, public GitHub repository sync
   check, public release citation check, public release citation sync check,
   public release citation certificate check, public release paper-ready release
-  check, public release export table check, public README release package check,
+  check, public release export table check, public release acceptance certificate
+  check, public README release package check,
   public release final entry check, public README release map check, public
   release navigation check, public release checklist check, public source
   hygiene check, public release final package check, file-order check, clean
@@ -944,8 +961,8 @@ The README-facing entry names are kept aligned with
   certificate, public release complete entry projections, public release paper
   route, public release paper route entry projections, homepage summary,
   homepage verification note, GitHub homepage snippet, GitHub repository sync,
-  public release citation, citation sync, citation certificate, and paper-ready
-  release, and export table.
+  public release citation, citation sync, citation certificate, paper-ready
+  release, export table, and acceptance certificate.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
   release checklist, public source hygiene, expanded verification form,
@@ -2343,6 +2360,7 @@ Coq paper route: type_theory_atlas_public_release_paper_route_holds
 Coq citation certificate: type_theory_atlas_public_release_citation_certificate_holds
 Coq paper-ready release: type_theory_atlas_public_release_paper_ready_release_holds
 Coq export table: type_theory_atlas_public_release_export_table_holds
+Coq release acceptance: type_theory_atlas_public_release_acceptance_certificate_holds
 ```
 
 This citation points to the Coq-checked public release manifest, which packages
@@ -2353,7 +2371,9 @@ theorem, final certificate, release summary, and paper-facing statement into
 one citation-ready Coq handle. The paper-ready release theorem is the shortest
 Coq theorem for paper-facing citation of the same package. The export table
 lists the key objects that the paper-ready release theorem exposes for readers
-and release checks.
+and release checks. The acceptance certificate is the final Coq handle for
+checking that the public release exposes the citation package, export table,
+stage route, final theorem, release summary, and paper-facing statement.
 
 ## Build Status Summary
 
@@ -2371,6 +2391,8 @@ The current public release paper-ready release entry point is
 `type_theory_atlas_public_release_paper_ready_release_holds`.
 The current public release export table entry point is
 `type_theory_atlas_public_release_export_table_holds`.
+The current public release acceptance certificate entry point is
+`type_theory_atlas_public_release_acceptance_certificate_holds`.
 The current public release complete certificate entry point is
 `type_theory_atlas_public_release_complete_certificate_holds`.
 The current daily automation report-complete entry point is
@@ -2439,7 +2461,8 @@ The public release checklist is:
 - Coq release paper route certificate: `type_theory_atlas_public_release_paper_route_certificate_holds`;
 - Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`;
 - Coq release citation certificate: `type_theory_atlas_public_release_citation_certificate_holds`;
-- Coq paper-ready release theorem: `type_theory_atlas_public_release_paper_ready_release_holds`.
+- Coq paper-ready release theorem: `type_theory_atlas_public_release_paper_ready_release_holds`;
+- Coq release acceptance certificate: `type_theory_atlas_public_release_acceptance_certificate_holds`.
 
 The expected verification story is:
 
@@ -2477,6 +2500,7 @@ The expected verification story is:
 - public release citation certificate check: `make check-public-release-citation-certificate`;
 - public release paper-ready release check: `make check-public-release-paper-ready-release`;
 - public release export table check: `make check-public-release-export-table`;
+- public release acceptance certificate check: `make check-public-release-acceptance-certificate`;
 - public README release package check: `make check-public-readme-release-package`;
 - public release final entry check: `make check-public-release-final-entry`;
 - public README release map check: `make check-public-readme-release-map`;
