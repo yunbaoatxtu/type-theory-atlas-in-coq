@@ -12540,3 +12540,62 @@ Proof.
   exact (atlas_public_release_homepage_paper_statement
     type_theory_atlas_public_release_homepage_index_holds).
 Qed.
+
+Record type_theory_atlas_public_release_quick_start : Prop := {
+  atlas_public_release_quick_start_homepage_index :
+    type_theory_atlas_public_release_homepage_index;
+  atlas_public_release_quick_start_one_click_entry :
+    type_theory_atlas_public_release_one_click_entry;
+  atlas_public_release_quick_start_final_index :
+    type_theory_atlas_public_release_final_index;
+  atlas_public_release_quick_start_complete :
+    type_theory_atlas_public_release_complete;
+  atlas_public_release_quick_start_paper_statement :
+    type_theory_atlas_paper_statement
+}.
+
+Theorem type_theory_atlas_public_release_quick_start_holds :
+  type_theory_atlas_public_release_quick_start.
+Proof.
+  constructor.
+  - apply type_theory_atlas_public_release_homepage_index_holds.
+  - apply type_theory_atlas_public_release_homepage_index_gives_one_click_entry.
+  - apply type_theory_atlas_public_release_homepage_index_gives_final_index.
+  - apply type_theory_atlas_public_release_homepage_index_gives_complete.
+  - apply type_theory_atlas_public_release_homepage_index_gives_paper_statement.
+Qed.
+
+Corollary type_theory_atlas_public_release_quick_start_gives_homepage_index :
+  type_theory_atlas_public_release_homepage_index.
+Proof.
+  exact (atlas_public_release_quick_start_homepage_index
+    type_theory_atlas_public_release_quick_start_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_quick_start_gives_one_click_entry :
+  type_theory_atlas_public_release_one_click_entry.
+Proof.
+  exact (atlas_public_release_quick_start_one_click_entry
+    type_theory_atlas_public_release_quick_start_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_quick_start_gives_final_index :
+  type_theory_atlas_public_release_final_index.
+Proof.
+  exact (atlas_public_release_quick_start_final_index
+    type_theory_atlas_public_release_quick_start_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_quick_start_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_quick_start_complete
+    type_theory_atlas_public_release_quick_start_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_quick_start_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_quick_start_paper_statement
+    type_theory_atlas_public_release_quick_start_holds).
+Qed.

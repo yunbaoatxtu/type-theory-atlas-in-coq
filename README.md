@@ -32,6 +32,8 @@ Current top-level entry points:
   `type_theory_atlas_public_release_final_index_holds`;
 - public release homepage index:
   `type_theory_atlas_public_release_homepage_index_holds`;
+- public release quick start:
+  `type_theory_atlas_public_release_quick_start_holds`;
 - public release citation certificate:
   `type_theory_atlas_public_release_citation_certificate_holds`;
 - final public release verification:
@@ -133,6 +135,7 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_one_click_entry_holds`,
   `type_theory_atlas_public_release_final_index_holds`,
   `type_theory_atlas_public_release_homepage_index_holds`,
+  `type_theory_atlas_public_release_quick_start_holds`,
   `type_theory_atlas_public_release_citation_certificate_holds`,
   `type_theory_atlas_automation_done_dashboard_certificate_holds`,
   `type_theory_atlas_automation_done_holds`,
@@ -979,6 +982,14 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_homepage_index_gives_paper_route`,
   `type_theory_atlas_public_release_homepage_index_gives_release_summary`, and
   `type_theory_atlas_public_release_homepage_index_gives_paper_statement`.
+- Public release quick start:
+  `type_theory_atlas_public_release_quick_start`,
+  `type_theory_atlas_public_release_quick_start_holds`,
+  `type_theory_atlas_public_release_quick_start_gives_homepage_index`,
+  `type_theory_atlas_public_release_quick_start_gives_one_click_entry`,
+  `type_theory_atlas_public_release_quick_start_gives_final_index`,
+  `type_theory_atlas_public_release_quick_start_gives_complete`, and
+  `type_theory_atlas_public_release_quick_start_gives_paper_statement`.
 - Build status checks:
   `make check`, which runs the environment check, README entry consistency
   check, top-level entry sync check across the README overview, Build Status
@@ -996,7 +1007,8 @@ The README-facing entry names are kept aligned with
   public release citation certificate check, public release paper-ready release
   check, public release export table check, public release acceptance certificate
   check, public release one-click entry check, public release final index check,
-  public release homepage index check, public README release package check,
+  public release homepage index check, public release quick start check, public
+  README release package check,
   public release final entry check, public README release map check, public
   release navigation check, public release checklist check, public source
   hygiene check, public release final package check, file-order check, clean
@@ -1008,7 +1020,7 @@ The README-facing entry names are kept aligned with
   homepage verification note, GitHub homepage snippet, GitHub repository sync,
   public release citation, citation sync, citation certificate, paper-ready
   release, export table, acceptance certificate, one-click entry, and final
-  index, and homepage index.
+  index, homepage index, and quick start.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
   release checklist, public source hygiene, expanded verification form,
@@ -2364,6 +2376,9 @@ Final public release index:
 Homepage release index:
 `type_theory_atlas_public_release_homepage_index_holds`.
 
+Quick release proof entry:
+`type_theory_atlas_public_release_quick_start_holds`.
+
 Verification entry point: `make check` runs the complete verification suite,
 including README consistency checks, Coq clean rebuild, and unfinished-proof
 scan.
@@ -2385,6 +2400,9 @@ Final public release index:
 
 Homepage release index:
 `type_theory_atlas_public_release_homepage_index_holds`.
+
+Quick release proof entry:
+`type_theory_atlas_public_release_quick_start_holds`.
 
 Release complete certificate:
 `type_theory_atlas_public_release_complete_certificate_holds`.
@@ -2422,6 +2440,7 @@ Coq release acceptance: type_theory_atlas_public_release_acceptance_certificate_
 Coq one-click release: type_theory_atlas_public_release_one_click_entry_holds
 Coq final index: type_theory_atlas_public_release_final_index_holds
 Coq homepage index: type_theory_atlas_public_release_homepage_index_holds
+Coq quick start: type_theory_atlas_public_release_quick_start_holds
 ```
 
 This citation points to the Coq-checked public release manifest, which packages
@@ -2441,7 +2460,9 @@ handle: it lists the one-click theorem together with the acceptance certificate,
 export table, citation package, stage route, final theorem, release summary,
 and paper-facing statement. The homepage index is the reader-facing landing
 handle that points from the final index to the homepage summary, release
-summary, and paper statement.
+summary, and paper statement. The quick-start theorem is the shortest release
+proof bundle for readers: homepage index, one-click entry, final index,
+release-complete theorem, and paper statement.
 
 ## Build Status Summary
 
@@ -2467,6 +2488,8 @@ The current public release final index entry point is
 `type_theory_atlas_public_release_final_index_holds`.
 The current public release homepage index entry point is
 `type_theory_atlas_public_release_homepage_index_holds`.
+The current public release quick-start entry point is
+`type_theory_atlas_public_release_quick_start_holds`.
 The current public release complete certificate entry point is
 `type_theory_atlas_public_release_complete_certificate_holds`.
 The current daily automation report-complete entry point is
@@ -2539,7 +2562,8 @@ The public release checklist is:
 - Coq release acceptance certificate: `type_theory_atlas_public_release_acceptance_certificate_holds`;
 - Coq one-click release theorem: `type_theory_atlas_public_release_one_click_entry_holds`;
 - Coq final public release index: `type_theory_atlas_public_release_final_index_holds`;
-- Coq homepage release index: `type_theory_atlas_public_release_homepage_index_holds`.
+- Coq homepage release index: `type_theory_atlas_public_release_homepage_index_holds`;
+- Coq quick-start release theorem: `type_theory_atlas_public_release_quick_start_holds`.
 
 The expected verification story is:
 
@@ -2581,6 +2605,7 @@ The expected verification story is:
 - public release one-click entry check: `make check-public-release-one-click-entry`;
 - public release final index check: `make check-public-release-final-index`;
 - public release homepage index check: `make check-public-release-homepage-index`;
+- public release quick start check: `make check-public-release-quick-start`;
 - public README release package check: `make check-public-readme-release-package`;
 - public release final entry check: `make check-public-release-final-entry`;
 - public README release map check: `make check-public-readme-release-map`;
