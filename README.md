@@ -858,6 +858,16 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_paper_route_gives_stage5_translation_reliability`,
   `type_theory_atlas_public_release_paper_route_gives_stage6_metatheory`, and
   `type_theory_atlas_public_release_paper_route_gives_paper_statement`.
+- Public release paper route entry projections:
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage1_unified_syntax`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage2_mltt`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage3_utt`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage4_tdtt_typing`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage4_tdtt_dashboard`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage5_system_embeddings`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage5_translation_reliability`,
+  `type_theory_atlas_public_release_paper_route_entry_gives_stage6_metatheory`, and
+  `type_theory_atlas_public_release_paper_route_entry_gives_paper_statement`.
 - Build status checks:
   `make check`, which runs the environment check, README entry consistency
   check, top-level entry sync check across the README overview, Build Status
@@ -869,17 +879,19 @@ The README-facing entry names are kept aligned with
   stage-order check, daily automation report sync check, public release
   manifest check, public release manifest stage-sync check, public release
   complete certificate check, public release complete entry projection check,
-  public release paper route check, public GitHub homepage snippet check,
-  public GitHub repository sync check, public release citation sync check,
-  public README release package check, public release final entry check, public
-  README release map check, public release navigation check, public release
-  checklist check, public source hygiene check, public release final package
-  check, file-order check, clean rebuild, and unfinished-proof scan.
+  public release paper route check, public release paper route entry projection
+  check, public GitHub homepage snippet check, public GitHub repository sync
+  check, public release citation sync check, public README release package
+  check, public release final entry check, public README release map check,
+  public release navigation check, public release checklist check, public
+  source hygiene check, public release final package check, file-order check,
+  clean rebuild, and unfinished-proof scan.
   The public README release package check covers the public release manifest,
   public release manifest stage field/projection order, public release complete
   certificate, public release complete entry projections, public release paper
-  route, homepage summary, homepage verification note, GitHub homepage snippet,
-  GitHub repository sync, public release citation, and citation sync.
+  route, public release paper route entry projections, homepage summary,
+  homepage verification note, GitHub homepage snippet, GitHub repository sync,
+  public release citation, and citation sync.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
   release checklist, public source hygiene, expanded verification form,
@@ -2198,6 +2210,9 @@ packages that short final entry with the stage route, translation reliability,
 main metatheory theorem, and paper-facing statement for paper-level citation.
 The theorem `type_theory_atlas_public_release_paper_route_holds` is the
 shortest paper-route theorem alias for that certificate.
+Its `type_theory_atlas_public_release_paper_route_entry_gives_*` projections
+expose the same stage route and paper-facing statement directly from the short
+paper route entry.
 
 ## Homepage Summary
 
@@ -2380,6 +2395,7 @@ The expected verification story is:
 - public release complete entry projection check: `make check-public-release-complete-entry-projections`;
 - public release paper route entry check: `make check-public-release-paper-route-entry`;
 - public release paper route check: `make check-public-release-paper-route`;
+- public release paper route entry projection check: `make check-public-release-paper-route-entry-projections`;
 - public homepage summary check: `make check-public-homepage-summary`;
 - public homepage verification check: `make check-public-homepage-verification`;
 - public GitHub homepage snippet check: `make check-public-github-homepage-snippet`;
