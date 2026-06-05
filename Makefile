@@ -150,6 +150,7 @@ check-daily-top-levels:
 		(echo "Missing rg: install ripgrep before checking top-level entries." && exit 1)
 	@missing=0; \
 	for entry in \
+		type_theory_atlas_public_release_complete_holds \
 		type_theory_atlas_public_release_complete_certificate_holds \
 		type_theory_atlas_public_release_manifest_holds \
 		type_theory_atlas_daily_automation_report_complete_holds \
@@ -1145,6 +1146,9 @@ check-public-release-complete:
 	fi
 	@missing=0; \
 	for entry in \
+		type_theory_atlas_public_release_complete \
+		type_theory_atlas_public_release_complete_holds \
+		type_theory_atlas_public_release_complete_gives_certificate \
 		type_theory_atlas_public_release_complete_certificate \
 		type_theory_atlas_public_release_complete_certificate_holds \
 		type_theory_atlas_public_release_manifest_gives_complete_certificate \
@@ -1199,6 +1203,7 @@ check-public-homepage-summary:
 		'TDTT' \
 		'system translations' \
 		'metatheory' \
+		'type_theory_atlas_public_release_complete_holds' \
 		'type_theory_atlas_public_release_complete_certificate_holds' \
 		'type_theory_atlas_public_release_manifest_holds'; do \
 		if ! sed -n '/^## Homepage Summary/,/^## Public Release Citation/p' README.md | rg -q "$$phrase"; then \
@@ -1252,6 +1257,7 @@ check-public-github-homepage-snippet:
 		'unified syntax framework -> MLTT -> UTT -> TDTT -> system translations -> metatheory' \
 		'type_theory_atlas_public_release_manifest_holds' \
 		'type_theory_atlas_public_release_complete_certificate_holds' \
+		'type_theory_atlas_public_release_complete_holds' \
 		'make check-public-release-final-package' \
 		'make check' \
 		'https://github.com/yunbaoatxtu/type-theory-atlas-in-coq'; do \
@@ -1313,7 +1319,11 @@ check-public-release-citation:
 		echo "Public release citation does not name the public release manifest theorem."; \
 		exit 1; \
 	fi
-	@echo "Public release citation snippet names the title, homepage, and Coq release manifest."
+	@if ! sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_complete_holds'; then \
+		echo "Public release citation does not name the public release complete theorem."; \
+		exit 1; \
+	fi
+	@echo "Public release citation snippet names the title, homepage, Coq release manifest, and complete theorem."
 
 check-public-release-citation-sync:
 	@command -v rg >/dev/null || \
@@ -1326,6 +1336,7 @@ check-public-release-citation-sync:
 	{ \
 		sed -n 's/^Theorem \(type_theory_atlas_public_release_manifest_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
 		sed -n 's/^Theorem \(type_theory_atlas_public_release_complete_certificate_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
+		sed -n 's/^Theorem \(type_theory_atlas_public_release_complete_holds\) :/\1/p' theories/Atlas/Metatheory.v; \
 	} | sort -u > "$$expected"; \
 	{ \
 		sed -n '/^## Homepage Summary/,/^## Public Release Citation/p' README.md | \
@@ -1334,19 +1345,22 @@ check-public-release-citation-sync:
 		sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | \
 			grep -Eo 'Coq release manifest: [A-Za-z_][A-Za-z0-9_]*' | \
 			sed 's/Coq release manifest: //'; \
+		sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | \
+			grep -Eo 'Coq release complete: [A-Za-z_][A-Za-z0-9_]*' | \
+			sed 's/Coq release complete: //'; \
 		sed -n '/^The current public release manifest entry point is/,/^The current daily automation report-complete entry point is/p' README.md | \
 			grep -Eo '`[A-Za-z_][A-Za-z0-9_]*`' | tr -d '`'; \
 	} | sort -u > "$$actual"; \
-	if [ "$$(wc -l < "$$expected" | tr -d ' ')" -ne 2 ]; then \
+	if [ "$$(wc -l < "$$expected" | tr -d ' ')" -ne 3 ]; then \
 		echo "Coq public release manifest/complete declarations are missing or ambiguous."; \
 		rm -f "$$expected" "$$actual"; \
 		exit 1; \
 	fi; \
 	if diff -u "$$expected" "$$actual"; then \
-		echo "Public release citation references match the Coq release manifest and complete certificate."; \
+		echo "Public release citation references match the Coq release manifest, complete certificate, and complete theorem."; \
 		rm -f "$$expected" "$$actual"; \
 	else \
-		echo "Public release citation references do not match the Coq release manifest and complete certificate."; \
+		echo "Public release citation references do not match the Coq release manifest, complete certificate, and complete theorem."; \
 		rm -f "$$expected" "$$actual"; \
 		exit 1; \
 	fi
@@ -1373,6 +1387,10 @@ check-public-readme-release-package:
 	fi
 	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_complete_certificate_holds'; then \
 		echo "Public README release package does not include the release complete certificate."; \
+		exit 1; \
+	fi
+	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_complete_holds'; then \
+		echo "Public README release package does not include the release complete theorem."; \
 		exit 1; \
 	fi
 	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q '`make check`'; then \
@@ -1503,9 +1521,10 @@ check-public-release-checklist:
 		'- clean Coq rebuild: `make clean && make -j1`;' \
 		'- unfinished-proof scan: `make check-no-admits`;' \
 		'- Coq release manifest theorem: `type_theory_atlas_public_release_manifest_holds`;' \
+		'- Coq release complete theorem: `type_theory_atlas_public_release_complete_holds`;' \
 		'- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.' > "$$expected"; \
 	sed -n '/^The public release checklist is:/,/^The expected verification story is:/p' README.md | \
-		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete certificate):' > "$$actual"; \
+		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release complete certificate):' > "$$actual"; \
 	if diff -u "$$expected" "$$actual"; then \
 		echo "Public release checklist matches the reusable release commands and theorem."; \
 		rm -f "$$expected" "$$actual"; \

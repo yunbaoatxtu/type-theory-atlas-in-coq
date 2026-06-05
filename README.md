@@ -10,6 +10,8 @@ metatheory.
 
 Current top-level entry points:
 
+- public release complete:
+  `type_theory_atlas_public_release_complete_holds`;
 - public release complete certificate:
   `type_theory_atlas_public_release_complete_certificate_holds`;
 - public release manifest:
@@ -102,6 +104,7 @@ The README-facing entry names are kept aligned with
 `theories/Atlas/Metatheory.v` as follows:
 
 - Current top-level entries:
+  `type_theory_atlas_public_release_complete_holds`,
   `type_theory_atlas_public_release_complete_certificate_holds`,
   `type_theory_atlas_automation_done_dashboard_certificate_holds`,
   `type_theory_atlas_automation_done_holds`,
@@ -801,7 +804,10 @@ The README-facing entry names are kept aligned with
   `type_theory_atlas_public_release_manifest_gives_stage5_translation_reliability`,
   `type_theory_atlas_public_release_manifest_gives_stage6_metatheory`, and
   `type_theory_atlas_public_release_manifest_gives_paper_statement`.
-- Public release complete certificate:
+- Public release complete entry and certificate:
+  `type_theory_atlas_public_release_complete`,
+  `type_theory_atlas_public_release_complete_holds`,
+  `type_theory_atlas_public_release_complete_gives_certificate`,
   `type_theory_atlas_public_release_complete_certificate`,
   `type_theory_atlas_public_release_complete_certificate_holds`,
   `type_theory_atlas_public_release_manifest_gives_complete_certificate`,
@@ -2147,6 +2153,9 @@ The theorem `type_theory_atlas_public_release_complete_certificate_holds`
 packages that citation-ready manifest with the final public theorem, final
 certificate, daily report, dashboard, stage-route components, metatheory, and
 paper-facing statement into one release-complete Coq handle.
+The theorem `type_theory_atlas_public_release_complete_holds` is the shortest
+final release entry point, and it recovers the release-complete certificate for
+direct reuse.
 
 ## Homepage Summary
 
@@ -2160,6 +2169,9 @@ Verified stage route: unified syntax framework -> MLTT -> UTT -> TDTT ->
 system translations -> metatheory.
 
 Final Coq entry point:
+`type_theory_atlas_public_release_complete_holds`.
+
+Release complete certificate:
 `type_theory_atlas_public_release_complete_certificate_holds`.
 
 Release manifest entry point:
@@ -2184,6 +2196,9 @@ Release manifest theorem: `type_theory_atlas_public_release_manifest_holds`.
 Release complete certificate:
 `type_theory_atlas_public_release_complete_certificate_holds`.
 
+Shortest release entry:
+`type_theory_atlas_public_release_complete_holds`.
+
 Release package check: `make check-public-release-final-package`.
 
 Complete verification: `make check`.
@@ -2199,6 +2214,7 @@ release entry can be cited as:
 Type Theory Atlas in Coq: From MLTT and UTT to Temporal Dependent Type Theory.
 Repository: https://github.com/yunbaoatxtu/type-theory-atlas-in-coq
 Coq release manifest: type_theory_atlas_public_release_manifest_holds
+Coq release complete: type_theory_atlas_public_release_complete_holds
 ```
 
 This citation points to the Coq-checked public release manifest, which packages
@@ -2207,6 +2223,8 @@ and paper-facing statement into one release handle.
 
 ## Build Status Summary
 
+The current public release complete entry point is
+`type_theory_atlas_public_release_complete_holds`.
 The current public release manifest entry point is
 `type_theory_atlas_public_release_manifest_holds`.
 The current public release complete certificate entry point is
@@ -2272,6 +2290,7 @@ The public release checklist is:
 - clean Coq rebuild: `make clean && make -j1`;
 - unfinished-proof scan: `make check-no-admits`;
 - Coq release manifest theorem: `type_theory_atlas_public_release_manifest_holds`;
+- Coq release complete theorem: `type_theory_atlas_public_release_complete_holds`;
 - Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.
 
 The expected verification story is:

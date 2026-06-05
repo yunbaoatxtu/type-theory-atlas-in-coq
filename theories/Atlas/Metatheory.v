@@ -11552,3 +11552,18 @@ Proof.
   exact (atlas_public_release_complete_paper_statement
     type_theory_atlas_public_release_complete_certificate_holds).
 Qed.
+
+Definition type_theory_atlas_public_release_complete : Prop :=
+  type_theory_atlas_public_release_complete_certificate.
+
+Theorem type_theory_atlas_public_release_complete_holds :
+  type_theory_atlas_public_release_complete.
+Proof.
+  apply type_theory_atlas_public_release_complete_certificate_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_gives_certificate :
+  type_theory_atlas_public_release_complete_certificate.
+Proof.
+  apply type_theory_atlas_public_release_complete_holds.
+Qed.
