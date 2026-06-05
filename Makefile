@@ -1,4 +1,4 @@
-.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
+.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
 
 ROCQ_PLATFORM_RESOURCES := $(firstword \
 	$(wildcard /Applications/Rocq-Platform~*.app/Contents/Resources) \
@@ -70,6 +70,8 @@ help:
 	@echo "                    Check public homepage verification note"
 	@echo "  make check-public-github-homepage-snippet"
 	@echo "                    Check GitHub homepage snippet"
+	@echo "  make check-public-github-repository-sync"
+	@echo "                    Check GitHub repository references"
 	@echo "  make check-public-release-citation"
 	@echo "                    Check public release citation snippet"
 	@echo "  make check-public-release-citation-sync"
@@ -1201,7 +1203,7 @@ check-public-github-homepage-snippet:
 		'type_theory_atlas_public_release_manifest_holds' \
 		'make check-public-release-final-package' \
 		'make check' \
-		'https://github.com/SHI-Yunbao'; do \
+		'https://github.com/yunbaoatxtu/type-theory-atlas-in-coq'; do \
 		if ! sed -n '/^## GitHub Homepage Snippet/,/^## Public Release Citation/p' README.md | rg -q "$$phrase"; then \
 			echo "GitHub homepage snippet is missing: $$phrase"; \
 			missing=1; \
@@ -1209,6 +1211,33 @@ check-public-github-homepage-snippet:
 	done; \
 	if [ "$$missing" -ne 0 ]; then exit 1; fi; \
 	echo "GitHub homepage snippet names the contribution, release theorem, and verification commands."
+
+check-public-github-repository-sync:
+	@command -v rg >/dev/null || \
+		(echo "Missing rg: install ripgrep before checking GitHub repository sync." && exit 1)
+	@if ! rg -q 'public GitHub repository sync check: `make check-public-github-repository-sync`' README.md; then \
+		echo "README build status summary does not name the public GitHub repository sync check."; \
+		exit 1; \
+	fi
+	@expected='https://github.com/yunbaoatxtu/type-theory-atlas-in-coq'; \
+	if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
+		actual=$$(git remote get-url origin | sed 's#git@github.com:#https://github.com/#; s#\.git$$##'); \
+		if [ "$$actual" != "$$expected" ]; then \
+			echo "Git origin remote does not match the public repository URL."; \
+			echo "expected: $$expected"; \
+			echo "actual:   $$actual"; \
+			exit 1; \
+		fi; \
+	fi; \
+	for section in \
+		'/^## GitHub Homepage Snippet/,/^## Public Release Citation/p' \
+		'/^## Public Release Citation/,/^## Build Status Summary/p'; do \
+		if ! sed -n "$$section" README.md | rg -q "$$expected"; then \
+			echo "README public release section does not name the repository URL: $$expected"; \
+			exit 1; \
+		fi; \
+	done; \
+	echo "GitHub repository URL matches README public release references."
 
 check-public-release-citation:
 	@command -v rg >/dev/null || \
@@ -1225,8 +1254,8 @@ check-public-release-citation:
 		echo "Public release citation does not name the project title."; \
 		exit 1; \
 	fi
-	@if ! sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | rg -q 'https://github.com/SHI-Yunbao'; then \
-		echo "Public release citation does not name the GitHub homepage."; \
+	@if ! sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | rg -q 'https://github.com/yunbaoatxtu/type-theory-atlas-in-coq'; then \
+		echo "Public release citation does not name the GitHub repository."; \
 		exit 1; \
 	fi
 	@if ! sed -n '/^## Public Release Citation/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_manifest_holds'; then \
@@ -1280,6 +1309,7 @@ check-public-readme-release-package:
 	@$(MAKE) check-public-homepage-summary
 	@$(MAKE) check-public-homepage-verification
 	@$(MAKE) check-public-github-homepage-snippet
+	@$(MAKE) check-public-github-repository-sync
 	@$(MAKE) check-public-release-citation
 	@$(MAKE) check-public-release-citation-sync
 	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_manifest_holds'; then \
@@ -1290,8 +1320,8 @@ check-public-readme-release-package:
 		echo "Public README release package does not include the complete verification entry point."; \
 		exit 1; \
 	fi
-	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'https://github.com/SHI-Yunbao'; then \
-		echo "Public README release package does not include the GitHub homepage."; \
+	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'https://github.com/yunbaoatxtu/type-theory-atlas-in-coq'; then \
+		echo "Public README release package does not include the GitHub repository."; \
 		exit 1; \
 	fi
 	@if ! sed -n '/^The expanded form is:/,/^## Build/p' README.md | rg -q '^make check-public-(readme-release|release-final)-package$$'; then \

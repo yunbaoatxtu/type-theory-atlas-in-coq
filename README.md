@@ -808,15 +808,15 @@ The README-facing entry names are kept aligned with
   check, daily automation report-complete check, daily automation report
   stage-order check, daily automation report sync check, public release
   manifest stage-sync check, public GitHub homepage snippet check, public
-  release citation sync check, public README release package check, public
-  release final entry check, public README release map check, public release
-  navigation check, public release checklist check, public source hygiene check,
-  public release final package check, file-order check, clean rebuild, and
-  unfinished-proof scan.
+  GitHub repository sync check, public release citation sync check, public
+  README release package check, public release final entry check, public README
+  release map check, public release navigation check, public release checklist
+  check, public source hygiene check, public release final package check,
+  file-order check, clean rebuild, and unfinished-proof scan.
   The public README release package check covers the public release manifest,
   public release manifest stage field/projection order, homepage summary,
-  homepage verification note, GitHub homepage snippet, public release citation,
-  and citation sync.
+  homepage verification note, GitHub homepage snippet, GitHub repository sync,
+  public release citation, and citation sync.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
   release checklist, public source hygiene, expanded verification form,
@@ -2155,7 +2155,7 @@ Release package check: `make check-public-release-final-package`.
 
 Complete verification: `make check`.
 
-Homepage: https://github.com/SHI-Yunbao
+Repository: https://github.com/yunbaoatxtu/type-theory-atlas-in-coq
 
 ## Public Release Citation
 
@@ -2164,7 +2164,7 @@ release entry can be cited as:
 
 ```text
 Type Theory Atlas in Coq: From MLTT and UTT to Temporal Dependent Type Theory.
-Homepage: https://github.com/SHI-Yunbao
+Repository: https://github.com/yunbaoatxtu/type-theory-atlas-in-coq
 Coq release manifest: type_theory_atlas_public_release_manifest_holds
 ```
 
@@ -2263,6 +2263,7 @@ The expected verification story is:
 - public homepage summary check: `make check-public-homepage-summary`;
 - public homepage verification check: `make check-public-homepage-verification`;
 - public GitHub homepage snippet check: `make check-public-github-homepage-snippet`;
+- public GitHub repository sync check: `make check-public-github-repository-sync`;
 - public release citation check: `make check-public-release-citation`;
 - public release citation sync check: `make check-public-release-citation-sync`;
 - public README release package check: `make check-public-readme-release-package`;
