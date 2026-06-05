@@ -810,16 +810,17 @@ The README-facing entry names are kept aligned with
   manifest stage-sync check, public GitHub homepage snippet check, public
   release citation sync check, public README release package check, public
   release final entry check, public README release map check, public release
-  navigation check, public release checklist check, public release final package
-  check, file-order check, clean rebuild, and unfinished-proof scan.
+  navigation check, public release checklist check, public source hygiene check,
+  public release final package check, file-order check, clean rebuild, and
+  unfinished-proof scan.
   The public README release package check covers the public release manifest,
   public release manifest stage field/projection order, homepage summary,
   homepage verification note, GitHub homepage snippet, public release citation,
   and citation sync.
   The public release final package check additionally covers the final public
   release entry, public README release map, public README navigation, public
-  release checklist, expanded verification form, help/README target sync, and
-  phony/help target sync.
+  release checklist, public source hygiene, expanded verification form,
+  help/README target sync, and phony/help target sync.
 
 This project develops a shared Coq framework for:
 
@@ -2269,6 +2270,7 @@ The expected verification story is:
 - public README release map check: `make check-public-readme-release-map`;
 - public release navigation check: `make check-public-release-navigation`;
 - public release checklist check: `make check-public-release-checklist`;
+- public source hygiene check: `make check-public-source-hygiene`;
 - public release final package check: `make check-public-release-final-package`;
 - expanded verification sync check: `make check-expanded-verification-sync`;
 - help/README target sync check: `make check-help-readme-sync`;

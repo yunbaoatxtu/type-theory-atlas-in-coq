@@ -1,4 +1,4 @@
-.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
+.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
 
 ROCQ_PLATFORM_RESOURCES := $(firstword \
 	$(wildcard /Applications/Rocq-Platform~*.app/Contents/Resources) \
@@ -84,6 +84,8 @@ help:
 	@echo "                    Check public release README navigation"
 	@echo "  make check-public-release-checklist"
 	@echo "                    Check public release checklist"
+	@echo "  make check-public-source-hygiene"
+	@echo "                    Check tracked source hygiene"
 	@echo "  make check-public-release-final-package"
 	@echo "                    Check final public release package"
 	@echo "  make check-expanded-verification-sync"
@@ -1423,6 +1425,45 @@ check-public-release-checklist:
 		exit 1; \
 	fi
 
+check-public-source-hygiene:
+	@command -v git >/dev/null || \
+		(echo "Missing git: install git before checking public source hygiene." && exit 1)
+	@command -v rg >/dev/null || \
+		(echo "Missing rg: install ripgrep before checking public source hygiene." && exit 1)
+	@if ! rg -q 'public source hygiene check: `make check-public-source-hygiene`' README.md; then \
+		echo "README build status summary does not name the public source hygiene check."; \
+		exit 1; \
+	fi
+	@missing=0; \
+	for entry in \
+		'.DS_Store' \
+		'.Makefile.coq.d' \
+		'*.aux' \
+		'*.glob' \
+		'*.vo' \
+		'*.vok' \
+		'*.vos' \
+		'.lia.cache' \
+		'Makefile.coq' \
+		'Makefile.coq.conf'; do \
+		if ! grep -Fxq "$$entry" .gitignore; then \
+			echo "Missing generated-file ignore rule in .gitignore: $$entry"; \
+			missing=1; \
+		fi; \
+	done; \
+	if [ "$$missing" -ne 0 ]; then exit 1; fi
+	@if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then \
+		tracked=$$(git ls-files | grep -E '(^|/)\.DS_Store$$|(^|/)\.Makefile\.coq\.d$$|(^|/)\.lia\.cache$$|(^|/)Makefile\.coq(\.conf)?$$|\.aux$$|\.glob$$|\.vo$$|\.vok$$|\.vos$$' || true); \
+		if [ -n "$$tracked" ]; then \
+			echo "Tracked generated files should be removed from the public source package:"; \
+			echo "$$tracked"; \
+			exit 1; \
+		fi; \
+		echo "Public source package has no tracked generated Coq or platform artifacts."; \
+	else \
+		echo "Not inside a Git worktree; generated-file ignore rules are present."; \
+	fi
+
 check-public-release-final-package:
 	@command -v rg >/dev/null || \
 		(echo "Missing rg: install ripgrep before checking the final public release package." && exit 1)
@@ -1434,11 +1475,12 @@ check-public-release-final-package:
 	@$(MAKE) check-public-readme-release-map
 	@$(MAKE) check-public-release-navigation
 	@$(MAKE) check-public-release-checklist
+	@$(MAKE) check-public-source-hygiene
 	@$(MAKE) check-public-readme-release-package
 	@$(MAKE) check-expanded-verification-sync
 	@$(MAKE) check-help-readme-sync
 	@$(MAKE) check-phony-help-sync
-	@echo "Final public release package checks release content, release checklist, README release map, README navigation, expanded verification, help/README sync, and .PHONY/help sync."
+	@echo "Final public release package checks release content, source hygiene, release checklist, README release map, README navigation, expanded verification, help/README sync, and .PHONY/help sync."
 
 check-expanded-verification-sync:
 	@command -v rg >/dev/null || \
