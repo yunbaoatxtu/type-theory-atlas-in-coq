@@ -2413,7 +2413,9 @@ The public release checklist is:
 - Coq release complete theorem: `type_theory_atlas_public_release_complete_holds`;
 - Coq release paper route theorem: `type_theory_atlas_public_release_paper_route_holds`;
 - Coq release paper route certificate: `type_theory_atlas_public_release_paper_route_certificate_holds`;
-- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.
+- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`;
+- Coq release citation certificate: `type_theory_atlas_public_release_citation_certificate_holds`;
+- Coq paper-ready release theorem: `type_theory_atlas_public_release_paper_ready_release_holds`.
 
 The expected verification story is:
 

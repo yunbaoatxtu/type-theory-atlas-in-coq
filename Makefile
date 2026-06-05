@@ -1831,9 +1831,11 @@ check-public-release-checklist:
 		'- Coq release complete theorem: `type_theory_atlas_public_release_complete_holds`;' \
 		'- Coq release paper route theorem: `type_theory_atlas_public_release_paper_route_holds`;' \
 		'- Coq release paper route certificate: `type_theory_atlas_public_release_paper_route_certificate_holds`;' \
-		'- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.' > "$$expected"; \
+		'- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`;' \
+		'- Coq release citation certificate: `type_theory_atlas_public_release_citation_certificate_holds`;' \
+		'- Coq paper-ready release theorem: `type_theory_atlas_public_release_paper_ready_release_holds`.' > "$$expected"; \
 	sed -n '/^The public release checklist is:/,/^The expected verification story is:/p' README.md | \
-		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release paper route theorem|Coq release paper route certificate|Coq release complete certificate):' > "$$actual"; \
+		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release paper route theorem|Coq release paper route certificate|Coq release complete certificate|Coq release citation certificate|Coq paper-ready release theorem):' > "$$actual"; \
 	if diff -u "$$expected" "$$actual"; then \
 		echo "Public release checklist matches the reusable release commands and theorem."; \
 		rm -f "$$expected" "$$actual"; \
