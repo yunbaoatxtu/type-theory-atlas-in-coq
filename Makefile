@@ -1,4 +1,4 @@
-.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-release-complete check-public-release-complete-entry-projections check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
+.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-release-complete check-public-release-complete-entry-projections check-public-release-paper-route check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
 
 ROCQ_PLATFORM_RESOURCES := $(firstword \
 	$(wildcard /Applications/Rocq-Platform~*.app/Contents/Resources) \
@@ -68,6 +68,8 @@ help:
 	@echo "                    Check public release complete certificate"
 	@echo "  make check-public-release-complete-entry-projections"
 	@echo "                    Check public release complete entry projections"
+	@echo "  make check-public-release-paper-route"
+	@echo "                    Check public release paper route"
 	@echo "  make check-public-homepage-summary"
 	@echo "                    Check public homepage summary snippet"
 	@echo "  make check-public-homepage-verification"
@@ -152,6 +154,7 @@ check-daily-top-levels:
 		(echo "Missing rg: install ripgrep before checking top-level entries." && exit 1)
 	@missing=0; \
 	for entry in \
+		type_theory_atlas_public_release_paper_route_certificate_holds \
 		type_theory_atlas_public_release_complete_holds \
 		type_theory_atlas_public_release_complete_certificate_holds \
 		type_theory_atlas_public_release_manifest_holds \
@@ -1225,6 +1228,75 @@ check-public-release-complete-entry-projections:
 	rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
 	echo "Public release complete entry projections match across Coq and README."
 
+check-public-release-paper-route:
+	@command -v rg >/dev/null || \
+		(echo "Missing rg: install ripgrep before checking public release paper route." && exit 1)
+	@if ! rg -q 'public release paper route check: `make check-public-release-paper-route`' README.md; then \
+		echo "README build status summary does not name the public release paper route check."; \
+		exit 1; \
+	fi
+	@if ! sed -n '/^Current top-level entry points:/,/^## Contents/p' README.md | rg -q 'type_theory_atlas_public_release_paper_route_certificate_holds'; then \
+		echo "README overview does not name the public release paper route certificate."; \
+		exit 1; \
+	fi
+	@if ! sed -n '/^## Build Status Summary/,/^The expected verification story is:/p' README.md | rg -q 'type_theory_atlas_public_release_paper_route_certificate_holds'; then \
+		echo "README build status summary does not name the public release paper route certificate."; \
+		exit 1; \
+	fi
+	@missing=0; \
+	for entry in \
+		type_theory_atlas_public_release_paper_route_certificate \
+		type_theory_atlas_public_release_paper_route_certificate_holds \
+		type_theory_atlas_public_release_complete_gives_paper_route_certificate \
+		type_theory_atlas_public_release_paper_route_gives_complete \
+		type_theory_atlas_public_release_paper_route_gives_stage1_unified_syntax \
+		type_theory_atlas_public_release_paper_route_gives_stage2_mltt \
+		type_theory_atlas_public_release_paper_route_gives_stage3_utt \
+		type_theory_atlas_public_release_paper_route_gives_stage4_tdtt_typing \
+		type_theory_atlas_public_release_paper_route_gives_stage4_tdtt_dashboard \
+		type_theory_atlas_public_release_paper_route_gives_stage5_system_embeddings \
+		type_theory_atlas_public_release_paper_route_gives_stage5_translation_reliability \
+		type_theory_atlas_public_release_paper_route_gives_stage6_metatheory \
+		type_theory_atlas_public_release_paper_route_gives_paper_statement; do \
+		if ! rg -q "^(Theorem|Corollary|Record|Definition|Lemma) $${entry}\\b" theories/Atlas/Metatheory.v; then \
+			echo "Missing public release paper route entry in theories/Atlas/Metatheory.v: $$entry"; \
+			missing=1; \
+		fi; \
+		if ! rg -q "$${entry}" README.md; then \
+			echo "Missing public release paper route entry in README.md: $$entry"; \
+			missing=1; \
+		fi; \
+	done; \
+	if [ "$$missing" -ne 0 ]; then exit 1; fi
+	@expected=$$(mktemp); coq_actual=$$(mktemp); readme_actual=$$(mktemp); \
+	printf '%s\n' \
+		type_theory_atlas_public_release_paper_route_gives_stage1_unified_syntax \
+		type_theory_atlas_public_release_paper_route_gives_stage2_mltt \
+		type_theory_atlas_public_release_paper_route_gives_stage3_utt \
+		type_theory_atlas_public_release_paper_route_gives_stage4_tdtt_typing \
+		type_theory_atlas_public_release_paper_route_gives_stage4_tdtt_dashboard \
+		type_theory_atlas_public_release_paper_route_gives_stage5_system_embeddings \
+		type_theory_atlas_public_release_paper_route_gives_stage5_translation_reliability \
+		type_theory_atlas_public_release_paper_route_gives_stage6_metatheory \
+		type_theory_atlas_public_release_paper_route_gives_paper_statement > "$$expected"; \
+	sed -n '/^Corollary type_theory_atlas_public_release_paper_route_gives_stage1_unified_syntax/,/^Corollary type_theory_atlas_public_release_paper_route_gives_paper_statement/p' theories/Atlas/Metatheory.v | \
+		grep -Eo 'type_theory_atlas_public_release_paper_route_gives_(stage[0-9][A-Za-z0-9_]*|paper_statement)' > "$$coq_actual"; \
+	sed -n '/^- Public release paper route certificate:/,/^- Build status checks:/p' README.md | \
+		grep -Eo '`type_theory_atlas_public_release_paper_route_gives_(stage[0-9][A-Za-z0-9_]*|paper_statement)`' | \
+		tr -d '`' > "$$readme_actual"; \
+	if ! diff -u "$$expected" "$$coq_actual"; then \
+		echo "Coq public release paper route projections are not in the expected order."; \
+		rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
+		exit 1; \
+	fi; \
+	if ! diff -u "$$expected" "$$readme_actual"; then \
+		echo "README public release paper route projections are not in the expected order."; \
+		rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
+		exit 1; \
+	fi; \
+	rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
+	echo "Public release paper route names and projections match across Coq and README."
+
 check-public-homepage-summary:
 	@command -v rg >/dev/null || \
 		(echo "Missing rg: install ripgrep before checking the public homepage summary." && exit 1)
@@ -1251,6 +1323,7 @@ check-public-homepage-summary:
 		'system translations' \
 		'metatheory' \
 		'type_theory_atlas_public_release_complete_holds' \
+		'type_theory_atlas_public_release_paper_route_certificate_holds' \
 		'type_theory_atlas_public_release_complete_certificate_holds' \
 		'type_theory_atlas_public_release_manifest_holds'; do \
 		if ! sed -n '/^## Homepage Summary/,/^## Public Release Citation/p' README.md | rg -q "$$phrase"; then \
@@ -1305,6 +1378,7 @@ check-public-github-homepage-snippet:
 		'type_theory_atlas_public_release_manifest_holds' \
 		'type_theory_atlas_public_release_complete_certificate_holds' \
 		'type_theory_atlas_public_release_complete_holds' \
+		'type_theory_atlas_public_release_paper_route_certificate_holds' \
 		'make check-public-release-final-package' \
 		'make check' \
 		'https://github.com/yunbaoatxtu/type-theory-atlas-in-coq'; do \
@@ -1423,6 +1497,7 @@ check-public-readme-release-package:
 	@$(MAKE) check-public-release-manifest-stage-sync
 	@$(MAKE) check-public-release-complete
 	@$(MAKE) check-public-release-complete-entry-projections
+	@$(MAKE) check-public-release-paper-route
 	@$(MAKE) check-public-homepage-summary
 	@$(MAKE) check-public-homepage-verification
 	@$(MAKE) check-public-github-homepage-snippet
@@ -1441,6 +1516,10 @@ check-public-readme-release-package:
 		echo "Public README release package does not include the release complete theorem."; \
 		exit 1; \
 	fi
+	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q 'type_theory_atlas_public_release_paper_route_certificate_holds'; then \
+		echo "Public README release package does not include the release paper route certificate."; \
+		exit 1; \
+	fi
 	@if ! sed -n '/^## Homepage Summary/,/^## Build Status Summary/p' README.md | rg -q '`make check`'; then \
 		echo "Public README release package does not include the complete verification entry point."; \
 		exit 1; \
@@ -1453,7 +1532,7 @@ check-public-readme-release-package:
 		echo "README expanded verification form does not include the public README release package check or final release wrapper."; \
 		exit 1; \
 	fi
-	@echo "Public README release package checks homepage summary, GitHub snippet, citation, citation sync, manifest, release-complete certificate, release-complete entry projections, stage field/projection order, and verification entry."
+	@echo "Public README release package checks homepage summary, GitHub snippet, citation, citation sync, manifest, release-complete certificate, release-complete entry projections, paper route, stage field/projection order, and verification entry."
 
 check-public-release-final-entry:
 	@command -v rg >/dev/null || \
@@ -1570,9 +1649,10 @@ check-public-release-checklist:
 		'- unfinished-proof scan: `make check-no-admits`;' \
 		'- Coq release manifest theorem: `type_theory_atlas_public_release_manifest_holds`;' \
 		'- Coq release complete theorem: `type_theory_atlas_public_release_complete_holds`;' \
+		'- Coq release paper route certificate: `type_theory_atlas_public_release_paper_route_certificate_holds`;' \
 		'- Coq release complete certificate: `type_theory_atlas_public_release_complete_certificate_holds`.' > "$$expected"; \
 	sed -n '/^The public release checklist is:/,/^The expected verification story is:/p' README.md | \
-		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release complete certificate):' > "$$actual"; \
+		grep -E '^- (release content package|full daily verification|clean Coq rebuild|unfinished-proof scan|Coq release manifest theorem|Coq release complete theorem|Coq release paper route certificate|Coq release complete certificate):' > "$$actual"; \
 	if diff -u "$$expected" "$$actual"; then \
 		echo "Public release checklist matches the reusable release commands and theorem."; \
 		rm -f "$$expected" "$$actual"; \
