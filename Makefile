@@ -1,4 +1,4 @@
-.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-release-complete check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
+.PHONY: all clean help check check-env check-readme-entries check-daily-top-levels check-daily-facade check-daily-facade-projections check-stage-route check-daily-release check-daily-conclusion check-daily-final-report check-daily-final-stage-route check-daily-final-stage-sync check-daily-automation-summary check-daily-automation-report-complete check-daily-automation-report-stage-order check-daily-automation-report-sync check-public-release-manifest check-public-release-manifest-stage-sync check-public-release-complete check-public-release-complete-entry-projections check-public-homepage-summary check-public-homepage-verification check-public-github-homepage-snippet check-public-github-repository-sync check-public-release-citation check-public-release-citation-sync check-public-readme-release-package check-public-release-final-entry check-public-readme-release-map check-public-release-navigation check-public-release-checklist check-public-source-hygiene check-public-release-final-package check-expanded-verification-sync check-help-readme-sync check-phony-help-sync check-project-order check-no-admits
 
 ROCQ_PLATFORM_RESOURCES := $(firstword \
 	$(wildcard /Applications/Rocq-Platform~*.app/Contents/Resources) \
@@ -66,6 +66,8 @@ help:
 	@echo "                    Check public release manifest stage order"
 	@echo "  make check-public-release-complete"
 	@echo "                    Check public release complete certificate"
+	@echo "  make check-public-release-complete-entry-projections"
+	@echo "                    Check public release complete entry projections"
 	@echo "  make check-public-homepage-summary"
 	@echo "                    Check public homepage summary snippet"
 	@echo "  make check-public-homepage-verification"
@@ -1165,7 +1167,16 @@ check-public-release-complete:
 		type_theory_atlas_public_release_complete_gives_stage5_system_embeddings \
 		type_theory_atlas_public_release_complete_gives_stage5_translation_reliability \
 		type_theory_atlas_public_release_complete_gives_stage6_metatheory \
-		type_theory_atlas_public_release_complete_gives_paper_statement; do \
+		type_theory_atlas_public_release_complete_gives_paper_statement \
+		type_theory_atlas_public_release_complete_entry_gives_stage1_unified_syntax \
+		type_theory_atlas_public_release_complete_entry_gives_stage2_mltt \
+		type_theory_atlas_public_release_complete_entry_gives_stage3_utt \
+		type_theory_atlas_public_release_complete_entry_gives_stage4_tdtt_typing \
+		type_theory_atlas_public_release_complete_entry_gives_stage4_tdtt_dashboard \
+		type_theory_atlas_public_release_complete_entry_gives_stage5_system_embeddings \
+		type_theory_atlas_public_release_complete_entry_gives_stage5_translation_reliability \
+		type_theory_atlas_public_release_complete_entry_gives_stage6_metatheory \
+		type_theory_atlas_public_release_complete_entry_gives_paper_statement; do \
 		if ! rg -q "^(Theorem|Corollary|Record|Definition|Lemma) $${entry}\\b" theories/Atlas/Metatheory.v; then \
 			echo "Missing public release complete entry in theories/Atlas/Metatheory.v: $$entry"; \
 			missing=1; \
@@ -1177,6 +1188,42 @@ check-public-release-complete:
 	done; \
 	if [ "$$missing" -ne 0 ]; then exit 1; fi; \
 	echo "Public release complete certificate names are documented and present in Metatheory.v."
+
+check-public-release-complete-entry-projections:
+	@command -v rg >/dev/null || \
+		(echo "Missing rg: install ripgrep before checking public release complete entry projections." && exit 1)
+	@if ! rg -q 'public release complete entry projection check: `make check-public-release-complete-entry-projections`' README.md; then \
+		echo "README build status summary does not name the public release complete entry projection check."; \
+		exit 1; \
+	fi
+	@expected=$$(mktemp); coq_actual=$$(mktemp); readme_actual=$$(mktemp); \
+	printf '%s\n' \
+		type_theory_atlas_public_release_complete_entry_gives_stage1_unified_syntax \
+		type_theory_atlas_public_release_complete_entry_gives_stage2_mltt \
+		type_theory_atlas_public_release_complete_entry_gives_stage3_utt \
+		type_theory_atlas_public_release_complete_entry_gives_stage4_tdtt_typing \
+		type_theory_atlas_public_release_complete_entry_gives_stage4_tdtt_dashboard \
+		type_theory_atlas_public_release_complete_entry_gives_stage5_system_embeddings \
+		type_theory_atlas_public_release_complete_entry_gives_stage5_translation_reliability \
+		type_theory_atlas_public_release_complete_entry_gives_stage6_metatheory \
+		type_theory_atlas_public_release_complete_entry_gives_paper_statement > "$$expected"; \
+	sed -n '/^Corollary type_theory_atlas_public_release_complete_entry_gives_stage1_unified_syntax/,/^Corollary type_theory_atlas_public_release_complete_entry_gives_paper_statement/p' theories/Atlas/Metatheory.v | \
+		grep -Eo 'type_theory_atlas_public_release_complete_entry_gives_(stage[0-9][A-Za-z0-9_]*|paper_statement)' > "$$coq_actual"; \
+	sed -n '/^- Public release complete entry projections:/,/^- Build status checks:/p' README.md | \
+		grep -Eo '`type_theory_atlas_public_release_complete_entry_gives_(stage[0-9][A-Za-z0-9_]*|paper_statement)`' | \
+		tr -d '`' > "$$readme_actual"; \
+	if ! diff -u "$$expected" "$$coq_actual"; then \
+		echo "Coq public release complete entry projections are not in the expected order."; \
+		rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
+		exit 1; \
+	fi; \
+	if ! diff -u "$$expected" "$$readme_actual"; then \
+		echo "README public release complete entry projections are not in the expected order."; \
+		rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
+		exit 1; \
+	fi; \
+	rm -f "$$expected" "$$coq_actual" "$$readme_actual"; \
+	echo "Public release complete entry projections match across Coq and README."
 
 check-public-homepage-summary:
 	@command -v rg >/dev/null || \
@@ -1375,6 +1422,7 @@ check-public-readme-release-package:
 	@$(MAKE) check-public-release-manifest
 	@$(MAKE) check-public-release-manifest-stage-sync
 	@$(MAKE) check-public-release-complete
+	@$(MAKE) check-public-release-complete-entry-projections
 	@$(MAKE) check-public-homepage-summary
 	@$(MAKE) check-public-homepage-verification
 	@$(MAKE) check-public-github-homepage-snippet
@@ -1405,7 +1453,7 @@ check-public-readme-release-package:
 		echo "README expanded verification form does not include the public README release package check or final release wrapper."; \
 		exit 1; \
 	fi
-	@echo "Public README release package checks homepage summary, GitHub snippet, citation, citation sync, manifest, release-complete certificate, stage field/projection order, and verification entry."
+	@echo "Public README release package checks homepage summary, GitHub snippet, citation, citation sync, manifest, release-complete certificate, release-complete entry projections, stage field/projection order, and verification entry."
 
 check-public-release-final-entry:
 	@command -v rg >/dev/null || \

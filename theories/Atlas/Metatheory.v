@@ -11567,3 +11567,75 @@ Corollary type_theory_atlas_public_release_complete_gives_certificate :
 Proof.
   apply type_theory_atlas_public_release_complete_holds.
 Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage1_unified_syntax :
+  type_theory_atlas_coverage.
+Proof.
+  exact (atlas_public_release_complete_stage1_unified_syntax
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage2_mltt :
+  forall gamma t a,
+    has_type gamma t a ->
+    supports MLTT t = true /\
+    supports MLTT a = true.
+Proof.
+  exact (atlas_public_release_complete_stage2_mltt
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage3_utt :
+  forall gamma t a,
+    utt_has_type gamma t a ->
+    supports UTT t = true /\
+    supports UTT a = true.
+Proof.
+  exact (atlas_public_release_complete_stage3_utt
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage4_tdtt_typing :
+  forall theta gamma t a,
+    tdtt_has_type theta gamma t a ->
+    supports TDTT t = true /\
+    supports TDTT a = true.
+Proof.
+  exact (atlas_public_release_complete_stage4_tdtt_typing
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage4_tdtt_dashboard :
+  atlas_tdtt_regularity_dashboard.
+Proof.
+  exact (atlas_public_release_complete_stage4_tdtt_dashboard
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage5_system_embeddings :
+  atlas_system_embedding_regularities.
+Proof.
+  exact (atlas_public_release_complete_stage5_system_embeddings
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage5_translation_reliability :
+  atlas_translation_reliability_summary.
+Proof.
+  exact (atlas_public_release_complete_stage5_translation_reliability
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_stage6_metatheory :
+  type_theory_atlas_main_theorem.
+Proof.
+  exact (atlas_public_release_complete_stage6_metatheory
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_complete_entry_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_complete_paper_statement
+    type_theory_atlas_public_release_complete_gives_certificate).
+Qed.
