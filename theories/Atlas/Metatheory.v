@@ -12272,3 +12272,53 @@ Proof.
   exact (atlas_public_release_acceptance_paper_statement
     type_theory_atlas_public_release_acceptance_certificate_holds).
 Qed.
+
+Definition type_theory_atlas_public_release_one_click_entry : Prop :=
+  type_theory_atlas_public_release_acceptance_certificate.
+
+Theorem type_theory_atlas_public_release_one_click_entry_holds :
+  type_theory_atlas_public_release_one_click_entry.
+Proof.
+  apply type_theory_atlas_public_release_acceptance_certificate_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_one_click_gives_acceptance_certificate :
+  type_theory_atlas_public_release_acceptance_certificate.
+Proof.
+  apply type_theory_atlas_public_release_one_click_entry_holds.
+Qed.
+
+Corollary type_theory_atlas_public_release_one_click_gives_export_table :
+  type_theory_atlas_public_release_export_table.
+Proof.
+  exact (atlas_public_release_acceptance_export_table
+    type_theory_atlas_public_release_one_click_gives_acceptance_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_one_click_gives_manifest :
+  type_theory_atlas_public_release_manifest.
+Proof.
+  exact (atlas_public_release_acceptance_manifest
+    type_theory_atlas_public_release_one_click_gives_acceptance_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_one_click_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_acceptance_complete
+    type_theory_atlas_public_release_one_click_gives_acceptance_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_one_click_gives_paper_route :
+  type_theory_atlas_public_release_paper_route.
+Proof.
+  exact (atlas_public_release_acceptance_paper_route
+    type_theory_atlas_public_release_one_click_gives_acceptance_certificate).
+Qed.
+
+Corollary type_theory_atlas_public_release_one_click_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_acceptance_paper_statement
+    type_theory_atlas_public_release_one_click_gives_acceptance_certificate).
+Qed.
