@@ -12451,3 +12451,92 @@ Proof.
   exact (atlas_public_release_final_index_paper_statement
     type_theory_atlas_public_release_final_index_holds).
 Qed.
+
+Record type_theory_atlas_public_release_homepage_index : Prop := {
+  atlas_public_release_homepage_final_index :
+    type_theory_atlas_public_release_final_index;
+  atlas_public_release_homepage_one_click_entry :
+    type_theory_atlas_public_release_one_click_entry;
+  atlas_public_release_homepage_acceptance_certificate :
+    type_theory_atlas_public_release_acceptance_certificate;
+  atlas_public_release_homepage_manifest :
+    type_theory_atlas_public_release_manifest;
+  atlas_public_release_homepage_complete :
+    type_theory_atlas_public_release_complete;
+  atlas_public_release_homepage_paper_route :
+    type_theory_atlas_public_release_paper_route;
+  atlas_public_release_homepage_release_summary :
+    type_theory_atlas_release_summary;
+  atlas_public_release_homepage_paper_statement :
+    type_theory_atlas_paper_statement
+}.
+
+Theorem type_theory_atlas_public_release_homepage_index_holds :
+  type_theory_atlas_public_release_homepage_index.
+Proof.
+  constructor.
+  - apply type_theory_atlas_public_release_final_index_holds.
+  - apply type_theory_atlas_public_release_final_index_gives_one_click_entry.
+  - apply type_theory_atlas_public_release_final_index_gives_acceptance_certificate.
+  - apply type_theory_atlas_public_release_final_index_gives_manifest.
+  - apply type_theory_atlas_public_release_final_index_gives_complete.
+  - apply type_theory_atlas_public_release_final_index_gives_paper_route.
+  - apply type_theory_atlas_public_release_final_index_gives_release_summary.
+  - apply type_theory_atlas_public_release_final_index_gives_paper_statement.
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_final_index :
+  type_theory_atlas_public_release_final_index.
+Proof.
+  exact (atlas_public_release_homepage_final_index
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_one_click_entry :
+  type_theory_atlas_public_release_one_click_entry.
+Proof.
+  exact (atlas_public_release_homepage_one_click_entry
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_acceptance_certificate :
+  type_theory_atlas_public_release_acceptance_certificate.
+Proof.
+  exact (atlas_public_release_homepage_acceptance_certificate
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_manifest :
+  type_theory_atlas_public_release_manifest.
+Proof.
+  exact (atlas_public_release_homepage_manifest
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_homepage_complete
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_paper_route :
+  type_theory_atlas_public_release_paper_route.
+Proof.
+  exact (atlas_public_release_homepage_paper_route
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_release_summary :
+  type_theory_atlas_release_summary.
+Proof.
+  exact (atlas_public_release_homepage_release_summary
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_homepage_index_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_homepage_paper_statement
+    type_theory_atlas_public_release_homepage_index_holds).
+Qed.
