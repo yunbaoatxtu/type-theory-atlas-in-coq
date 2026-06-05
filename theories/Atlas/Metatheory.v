@@ -12054,3 +12054,112 @@ Proof.
   exact (atlas_public_release_citation_paper_statement
     type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate).
 Qed.
+
+Record type_theory_atlas_public_release_export_table : Prop := {
+  atlas_public_release_export_paper_ready_release :
+    type_theory_atlas_public_release_paper_ready_release;
+  atlas_public_release_export_citation_certificate :
+    type_theory_atlas_public_release_citation_certificate;
+  atlas_public_release_export_manifest :
+    type_theory_atlas_public_release_manifest;
+  atlas_public_release_export_complete :
+    type_theory_atlas_public_release_complete;
+  atlas_public_release_export_paper_route :
+    type_theory_atlas_public_release_paper_route;
+  atlas_public_release_export_paper_route_certificate :
+    type_theory_atlas_public_release_paper_route_certificate;
+  atlas_public_release_export_final_public_theorem :
+    type_theory_atlas_final_public_theorem;
+  atlas_public_release_export_final_certificate :
+    type_theory_atlas_public_final_certificate;
+  atlas_public_release_export_release_summary :
+    type_theory_atlas_release_summary;
+  atlas_public_release_export_paper_statement :
+    type_theory_atlas_paper_statement
+}.
+
+Theorem type_theory_atlas_public_release_export_table_holds :
+  type_theory_atlas_public_release_export_table.
+Proof.
+  constructor.
+  - apply type_theory_atlas_public_release_paper_ready_release_holds.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_citation_certificate.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_manifest.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_complete.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_paper_route.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_paper_route_certificate.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_final_public_theorem.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_final_certificate.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_release_summary.
+  - apply type_theory_atlas_public_release_paper_ready_release_gives_paper_statement.
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_paper_ready_release :
+  type_theory_atlas_public_release_paper_ready_release.
+Proof.
+  exact (atlas_public_release_export_paper_ready_release
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_citation_certificate :
+  type_theory_atlas_public_release_citation_certificate.
+Proof.
+  exact (atlas_public_release_export_citation_certificate
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_manifest :
+  type_theory_atlas_public_release_manifest.
+Proof.
+  exact (atlas_public_release_export_manifest
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_complete :
+  type_theory_atlas_public_release_complete.
+Proof.
+  exact (atlas_public_release_export_complete
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_paper_route :
+  type_theory_atlas_public_release_paper_route.
+Proof.
+  exact (atlas_public_release_export_paper_route
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_paper_route_certificate :
+  type_theory_atlas_public_release_paper_route_certificate.
+Proof.
+  exact (atlas_public_release_export_paper_route_certificate
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_final_public_theorem :
+  type_theory_atlas_final_public_theorem.
+Proof.
+  exact (atlas_public_release_export_final_public_theorem
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_final_certificate :
+  type_theory_atlas_public_final_certificate.
+Proof.
+  exact (atlas_public_release_export_final_certificate
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_release_summary :
+  type_theory_atlas_release_summary.
+Proof.
+  exact (atlas_public_release_export_release_summary
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
+
+Corollary type_theory_atlas_public_release_export_table_gives_paper_statement :
+  type_theory_atlas_paper_statement.
+Proof.
+  exact (atlas_public_release_export_paper_statement
+    type_theory_atlas_public_release_export_table_holds).
+Qed.
